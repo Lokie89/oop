@@ -1,4 +1,4 @@
-package Test;
+package test;
 
 
 // https://jojoldu.tistory.com/231
