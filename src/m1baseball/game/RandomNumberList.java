@@ -10,7 +10,6 @@ public class RandomNumberList extends NumberList {
         randomNumberList = new LinkedHashSet<>();
         setRandomNumberList(start, last, size);
         setNumberList(randomNumberList);
-        System.out.println(randomNumberList);
     }
 
     private void setRandomNumberList(int start, int last, int size) {
