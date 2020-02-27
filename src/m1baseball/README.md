@@ -17,4 +17,4 @@
         2. Member - a. NumberList(대답 or 문제), b. Pitch(전달), c. Response(응답받는), d. Record(기록)
             a-1 NumberList
             d-1 NumberList
-#### 테스트v코드
+#### 테스트코드
