@@ -1,5 +1,7 @@
 package m1baseball.game.baseball;
 
+import m1baseball.exception.ContainException;
+
 import java.util.Arrays;
 
 public enum PitchResult {
@@ -27,13 +29,13 @@ public enum PitchResult {
         return isContain;
     }
 
-    public static PitchResult getPitchResult(boolean isSame, boolean isContain) {
+    public static PitchResult getPitchResult(boolean isSame, boolean isContain) throws ContainException {
 
         return Arrays
                 .stream(PitchResult.values())
                 .filter(pitchResult -> pitchResult.getIsSame() == isSame && pitchResult.getIsContain() == isContain)
                 .findAny()
-                .orElse(OUT);
+                .orElseThrow();
     }
 
     public String getEnglish() {

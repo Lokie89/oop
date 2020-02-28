@@ -1,5 +1,7 @@
 package m1baseball.game;
 
+import m1baseball.game.baseball.BaseBallGameException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +22,7 @@ public class NumberList {
         this.numberList = collectionToList(numberList);
     }
 
-    public List<Boolean> isContainNumberList(NumberList compareNumberList) throws Exception {
+    public List<Boolean> getIsContainNumberList(NumberList compareNumberList) throws BaseBallGameException {
         canCompare(compareNumberList);
         return getIsContainNumberResult(compareNumberList);
     }
@@ -38,7 +40,7 @@ public class NumberList {
         return numberList.contains(number);
     }
 
-    public List<Boolean> getIsSameNumberList(NumberList compareNumberList) throws Exception {
+    public List<Boolean> getIsSameNumberList(NumberList compareNumberList) throws BaseBallGameException {
         canCompare(compareNumberList);
         return getIsSameNumberListResult(compareNumberList);
     }
@@ -56,9 +58,9 @@ public class NumberList {
         return number1 == number2;
     }
 
-    private void canCompare(NumberList compareNumberList) throws Exception {
+    private void canCompare(NumberList compareNumberList) throws BaseBallGameException {
         if (!isSameSize(compareNumberList)) {
-            throw new Exception();
+            throw new BaseBallGameException("사이즈가 같지 않습니다. 확인하여 주세요.");
         }
     }
 
@@ -66,17 +68,17 @@ public class NumberList {
         return numberList.size() == compareNumberList.numberList.size();
     }
 
-    public void isProfitBetweenNumbers(int smallerNumber, int biggerNumber) throws Exception {
+    public void isProfitBetweenNumbers(int smallerNumber, int biggerNumber) throws BaseBallGameException {
         final int numberListSize = numberList.size();
         for (int i = 0; i < numberListSize; i++) {
             isProfitBetweenNumbers(numberList.get(i), smallerNumber, biggerNumber);
         }
     }
 
-    private void isProfitBetweenNumbers(int number, int smallerNumber, int biggerNumber) throws Exception {
+    private void isProfitBetweenNumbers(int number, int smallerNumber, int biggerNumber) throws BaseBallGameException {
         final boolean isProfit = number >= smallerNumber && number <= biggerNumber;
         if (!isProfit) {
-            throw new Exception();
+            throw new BaseBallGameException("0 ~ 9 사이의 숫자만 입력할 수 있습니다.");
         }
     }
 
