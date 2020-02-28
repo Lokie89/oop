@@ -9,6 +9,7 @@
         게임 종료 후 입력했던 RECORD 알려줌
         여러 사람이 함께 컴퓨터의 문제 맞추기 가능
         
+        
 #### 고민
     기능별 나누기
         1. BaseBallGame - a. NumberList(문제), b. Judge(판단), c. Response(응답하는) 기능이 있는 게임

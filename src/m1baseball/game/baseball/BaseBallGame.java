@@ -1,11 +1,10 @@
 package m1baseball.game.baseball;
 
+import m1baseball.Parsing;
 import m1baseball.exception.ContainException;
 import m1baseball.exception.MinusException;
-import m1baseball.Parsing;
 import m1baseball.exception.ParsingException;
 import m1baseball.game.CustomScanner;
-import m1baseball.game.Game;
 import m1baseball.game.NumberList;
 import m1baseball.member.baseball.BaseBallPlayer;
 import m1baseball.member.baseball.BaseBallPlayerType;
@@ -13,14 +12,13 @@ import m1baseball.member.baseball.BaseBallPlayerType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseBallGame extends Game {
+public class BaseBallGame {
 
-    private final int pitchLimit;
     private final NumberList gameNumberList;
     private final List<BaseBallPlayer> baseBallPlayerList;
+    private final int pitchLimit;
     private int pitchCount = 0;
     private boolean isGameOver = false;
-
 
     public BaseBallGame() {
         this.pitchLimit = getPitchLimit();
@@ -55,36 +53,17 @@ public class BaseBallGame extends Game {
         return number < 0;
     }
 
-    public static void play() {
-        printStartGame("BaseBall");
-        while (true) {
-            try {
-                new BaseBallGame().pitch();
-            } catch (BaseBallGameException e) {
-                e.printMessage();
-                continue;
-            } catch (ParsingException e) {
-                e.printMessage();
-                continue;
-            } catch (Exception e) {
-                e.printStackTrace();
-                continue;
-            }
-            if (!isGoingReGame(askReGame())) {
-                break;
-            }
+    public void play() {
+        try {
+            pitch();
+        } catch (BaseBallGameException e) {
+            e.printMessage();
+        } catch (ParsingException e) {
+            e.printMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
-    private static boolean isGoingReGame(int answer) {
-        return answer == 1;
-    }
-
-    private static Integer askReGame() throws ParsingException {
-        final String info = "게임을 더 하시겠습니까? \n 1. 한번더 2. 종료";
-        return Parsing.strToInteger(new CustomScanner(info).getFirstResponse()[0]);
-    }
-
 
     private BaseBallGameVersion scanVersion() throws ParsingException {
         final String info = "버전을 선택하세요 \n 1. Random, 2. Custom";
@@ -164,9 +143,21 @@ public class BaseBallGame extends Game {
         return responseList[0];
     }
 
+    private void checkGame(boolean checkCondition) {
+        if (checkCondition) {
+            isGameOver = true;
+            System.out.println("게임이 끝났습니다.");
+        }
+    }
+
+    private boolean isGameOver() {
+        return isGameOver;
+    }
+
     private void pitch() throws BaseBallGameException {
         validationPlayerList();
-        while (!haveToQuit()) {
+        checkGame(isOverCount());
+        while (!isGameOver()) {
             pitchByPlayerList();
         }
     }
@@ -181,9 +172,6 @@ public class BaseBallGame extends Game {
         return baseBallPlayerList.size() > 0;
     }
 
-    private boolean haveToQuit() {
-        return isOverCount() || isGameOver;
-    }
 
     private boolean isOverCount() {
         return pitchCount >= pitchLimit;
@@ -191,7 +179,7 @@ public class BaseBallGame extends Game {
 
     private void pitchByPlayerList() {
         int turn = 0;
-        while (!haveToQuit() && isTurnNotOverPlayerSize(turn)) {
+        while (!isGameOver() && isTurnNotOverPlayerSize(turn)) {
             try {
                 pitchByPlayer(baseBallPlayerList.get(turn));
             } catch (BaseBallGameException e) {
@@ -202,6 +190,7 @@ public class BaseBallGame extends Game {
                 turn--;
             }
             turn++;
+            checkGame(isOverCount());
         }
     }
 
@@ -214,7 +203,7 @@ public class BaseBallGame extends Game {
         System.out.println((pitchCount + 1) + " / " + pitchLimit + " Pitching");
         PitchResultList pitchResultList = getPitchResult(baseBallPlayer.getNumberList());
         pitchResultList.print();
-        isGameOver = pitchResultList.isAllStrike();
+        checkGame(pitchResultList.isAllStrike());
         pitchCount++;
     }
 
