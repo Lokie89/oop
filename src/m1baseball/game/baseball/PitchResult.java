@@ -35,7 +35,7 @@ public enum PitchResult {
                 .stream(PitchResult.values())
                 .filter(pitchResult -> pitchResult.getIsSame() == isSame && pitchResult.getIsContain() == isContain)
                 .findAny()
-                .orElseThrow();
+                .orElseThrow(null);
     }
 
     public String getEnglish() {

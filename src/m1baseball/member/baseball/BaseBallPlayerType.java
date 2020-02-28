@@ -48,7 +48,7 @@ public enum BaseBallPlayerType {
                     .stream(BaseBallPlayerType.values())
                     .filter(baseBallPlayerType -> baseBallPlayerType.getType().equals(type))
                     .findAny()
-                    .orElseThrow()
+                    .orElseThrow(null)
                     ;
         } catch (NoSuchElementException e) {
             throw new ContainException();

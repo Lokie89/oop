@@ -38,7 +38,7 @@ public enum BaseBallGameVersion {
                     .stream(BaseBallGameVersion.values())
                     .filter(baseBallGameVersion -> baseBallGameVersion.getVersion().equals(version))
                     .findAny()
-                    .orElseThrow()
+                    .orElseThrow(null)
                     ;
         } catch (NoSuchElementException e) {
             throw new ContainException();
