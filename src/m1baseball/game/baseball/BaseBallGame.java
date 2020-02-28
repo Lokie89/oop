@@ -14,6 +14,7 @@ import java.util.List;
 
 public class BaseBallGame {
 
+    private final BaseBallGameServer gameServer;
     private final NumberList gameNumberList;
     private final List<BaseBallPlayer> baseBallPlayerList;
     private final int pitchLimit;
@@ -21,10 +22,12 @@ public class BaseBallGame {
     private boolean isGameOver = false;
 
     public BaseBallGame() {
+        this.gameServer = new BaseBallGameServer();
         this.pitchLimit = getPitchLimit();
         gameNumberList = scanVersion().getQuestion();
         isProfitRule();
-        baseBallPlayerList = getBaseBallPlayerList();
+        baseBallPlayerList = new ArrayList<>();
+        getBaseBallPlayerList();
     }
 
     private Integer getPitchLimit() {
@@ -92,8 +95,7 @@ public class BaseBallGame {
         return Parsing.strToInteger(firstResponse[0]);
     }
 
-    private List<BaseBallPlayer> getBaseBallPlayerList() {
-        final List<BaseBallPlayer> baseBallPlayerList = new ArrayList<>();
+    private void getBaseBallPlayerList() {
         try {
             final int playerCount = scanHowManyPlayer();
             validationIsMinus(playerCount);
@@ -102,13 +104,12 @@ public class BaseBallGame {
             }
         } catch (ParsingException e) {
             e.printMessage();
-            return getBaseBallPlayerList();
+            getBaseBallPlayerList();
         } catch (MinusException e) {
             e.printMessage();
-            return getBaseBallPlayerList();
+            getBaseBallPlayerList();
         }
 
-        return baseBallPlayerList;
     }
 
     private BaseBallPlayer getBaseBallPlayer(int order) {
@@ -140,7 +141,27 @@ public class BaseBallGame {
     private String getBaseBallPlayerName() {
         final String infos = "그/그녀 의 이름은 무엇입니까?";
         String[] responseList = new CustomScanner(infos).getFirstResponse();
+        try {
+            validationSameName(responseList[0]);
+        } catch (BaseBallGameException e) {
+            e.printMessage();
+            return getBaseBallPlayerName();
+        }
         return responseList[0];
+    }
+
+    private void validationSameName(String name) throws BaseBallGameException {
+        if (isAlreadyExistName(name)) {
+            throw new BaseBallGameException("같은 이름이 있습니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private boolean isAlreadyExistName(String name) {
+        return baseBallPlayerList
+                .stream()
+                .filter(baseBallPlayer -> baseBallPlayer.isSameName(name))
+                .count()
+                > 0;
     }
 
     private void checkGame(boolean checkCondition) {
@@ -164,7 +185,7 @@ public class BaseBallGame {
 
     private void validationPlayerList() throws BaseBallGameException {
         if (!isPlayerExist()) {
-            throw new BaseBallGameException("이미 존재하는 이름입니다. 다시 입력하여 주세요.");
+            throw new BaseBallGameException("참가 인원이 부족합니다.");
         }
     }
 

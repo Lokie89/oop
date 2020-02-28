@@ -6,4 +6,8 @@ public class Member {
     public Member(String name) {
         this.name = name;
     }
+
+    public boolean isSameName(String compareName) {
+        return name.equals(compareName);
+    }
 }
