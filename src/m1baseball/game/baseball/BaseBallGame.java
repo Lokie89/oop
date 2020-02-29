@@ -14,7 +14,6 @@ import java.util.List;
 
 public class BaseBallGame {
 
-    private final BaseBallGameServer gameServer;
     private final NumberList gameNumberList;
     private final List<BaseBallPlayer> baseBallPlayerList;
     private final int pitchLimit;
@@ -22,7 +21,6 @@ public class BaseBallGame {
     private boolean isGameOver = false;
 
     public BaseBallGame() {
-        this.gameServer = new BaseBallGameServer();
         this.pitchLimit = getPitchLimit();
         gameNumberList = scanVersion().getQuestion();
         isProfitRule();

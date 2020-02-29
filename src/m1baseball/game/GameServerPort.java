@@ -1,12 +1,12 @@
-package m1baseball.game.baseball;
+package m1baseball.game;
 
-public enum BaseBallGameServerPort {
-    RECEIVE(5002),
-    SEND(5003),
+public enum GameServerPort {
+    MAINRECEIVE(5000),
+    MAINSEND(5001),
     ;
     private int portNumber;
 
-    BaseBallGameServerPort(int portNumber) {
+    GameServerPort(int portNumber) {
         this.portNumber = portNumber;
     }
 

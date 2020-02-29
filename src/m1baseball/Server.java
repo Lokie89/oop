@@ -11,11 +11,12 @@ public class Server {
         serverSocket = new ServerSocket(port);
     }
 
-    public void receiveMessage() throws IOException {
+    public String receiveMessage() throws IOException {
         Socket gameSocket = serverSocket.accept();
         BufferedReader br = new BufferedReader(new InputStreamReader(gameSocket.getInputStream()));
         String message = br.readLine();
         System.out.println(message);
+        return message;
     }
 
 
