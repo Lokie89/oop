@@ -1,5 +1,6 @@
 package m1baseball.game;
 
+import m1baseball.Parsing;
 import m1baseball.Server;
 
 import java.io.IOException;
@@ -13,15 +14,15 @@ public class MainServer {
         mainSendServer = new Server(GameServerPort.MAINSEND.getPortNumber());
     }
 
-    private void readyToReceive() throws IOException {
-        final String quitStr = "quit";
-        String msg;
-        while (!(msg = mainReceiveServer.receiveMessage()).equals(quitStr)) {
-
+    public GamePack openServer() throws IOException {
+        String info = "";
+        for (GamePack gamePack : GamePack.values()) {
+            info += gamePack.getGameOrder() + ". " + gamePack.name() + " ";
         }
+        mainSendServer.sendMessage(info);
+        String response = mainReceiveServer.receiveMessage();
+        Parsing.strToInteger(response);
+        return GamePack.getGamePack(response);
     }
 
-    private void readToSend(){
-
-    }
 }
