@@ -1,12 +1,9 @@
 package m1baseball;
 
-import m1baseball.game.Game;
-import m1baseball.game.GamePack;
-
-import java.io.IOException;
+import m1baseball.game.baseball.BaseBallGame;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        new Game(GamePack.BASEBALL).play();
+    public static void main(String[] args) {
+        new BaseBallGame().play();
     }
 }

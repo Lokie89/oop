@@ -6,8 +6,8 @@ import m1baseball.exception.MinusException;
 import m1baseball.exception.ParsingException;
 import m1baseball.game.CustomScanner;
 import m1baseball.game.NumberList;
+import m1baseball.game.RandomNumberList;
 import m1baseball.member.baseball.BaseBallPlayer;
-import m1baseball.member.baseball.BaseBallPlayerType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +15,24 @@ import java.util.List;
 public class BaseBallGame {
 
     private final NumberList gameNumberList;
-    private final List<BaseBallPlayer> baseBallPlayerList;
+    private final BaseBallPlayer baseBallPlayer;
     private final int pitchLimit;
     private int pitchCount = 0;
     private boolean isGameOver = false;
 
     public BaseBallGame() {
         this.pitchLimit = getPitchLimit();
-        gameNumberList = scanVersion().getQuestion();
+        final int start = 0;
+        final int last = 9;
+        final int size = 3;
+        gameNumberList = new RandomNumberList(start, last, size);
         isProfitRule();
-        baseBallPlayerList = new ArrayList<>();
-        getBaseBallPlayerList();
+        baseBallPlayer = new BaseBallPlayer(getName());
+    }
+
+    private String getName() {
+        final String info = "이름이 무엇입니까?";
+        return new CustomScanner(info).getFirstResponse()[0];
     }
 
     private Integer getPitchLimit() {
@@ -66,100 +73,10 @@ public class BaseBallGame {
         }
     }
 
-    private BaseBallGameVersion scanVersion() throws ParsingException {
-        final String info = "버전을 선택하세요 \n 1. Random, 2. Custom";
-        String[] responseStr = new CustomScanner(info).getFirstResponse();
-        try {
-            Parsing.strToInteger(responseStr);
-            return BaseBallGameVersion.getVersion(responseStr[0]);
-        } catch (ParsingException e) {
-            e.printMessage();
-            return scanVersion();
-        } catch (ContainException e) {
-            e.printMessage();
-            return scanVersion();
-        }
-    }
-
     private void isProfitRule() throws BaseBallGameException {
         final int smallerNumber = 0;
         final int biggerNumber = 9;
         gameNumberList.isProfitBetweenNumbers(smallerNumber, biggerNumber);
-    }
-
-    private int scanHowManyPlayer() throws ParsingException {
-        final String info = "플레이어는 몇명입니까?";
-        String[] firstResponse = new CustomScanner(info).getFirstResponse();
-        return Parsing.strToInteger(firstResponse[0]);
-    }
-
-    private void getBaseBallPlayerList() {
-        try {
-            final int playerCount = scanHowManyPlayer();
-            validationIsMinus(playerCount);
-            for (int i = 0; i < playerCount; i++) {
-                baseBallPlayerList.add(getBaseBallPlayer(i + 1));
-            }
-        } catch (ParsingException e) {
-            e.printMessage();
-            getBaseBallPlayerList();
-        } catch (MinusException e) {
-            e.printMessage();
-            getBaseBallPlayerList();
-        }
-
-    }
-
-    private BaseBallPlayer getBaseBallPlayer(int order) {
-        final String playerTypeStr = getBaseBallPlayerType(order);
-        BaseBallPlayerType baseBallPlayerType;
-        try {
-            baseBallPlayerType = BaseBallPlayerType.getBaseBallPlayerType(playerTypeStr);
-        } catch (ContainException e) {
-            e.printMessage();
-            return getBaseBallPlayer(order);
-        }
-        final String name = getBaseBallPlayerName();
-        return new BaseBallPlayer(baseBallPlayerType, name);
-    }
-
-    private String getBaseBallPlayerType(int order) {
-        final String infos = order + "번째 플레이어는 누구입니까? 1. CUSTOM( HUMAN ), 2. RANDOM( COMPUTER )";
-        String[] responseList = new CustomScanner(infos).getFirstResponse();
-        String playerTypeStr = responseList[0];
-        try {
-            Parsing.strToInteger(playerTypeStr);
-            return playerTypeStr;
-        } catch (ParsingException e) {
-            e.printMessage();
-            return getBaseBallPlayerType(order);
-        }
-    }
-
-    private String getBaseBallPlayerName() {
-        final String infos = "그/그녀 의 이름은 무엇입니까?";
-        String[] responseList = new CustomScanner(infos).getFirstResponse();
-        try {
-            validationSameName(responseList[0]);
-        } catch (BaseBallGameException e) {
-            e.printMessage();
-            return getBaseBallPlayerName();
-        }
-        return responseList[0];
-    }
-
-    private void validationSameName(String name) throws BaseBallGameException {
-        if (isAlreadyExistName(name)) {
-            throw new BaseBallGameException("같은 이름이 있습니다. 다시 입력해 주세요.");
-        }
-    }
-
-    private boolean isAlreadyExistName(String name) {
-        return baseBallPlayerList
-                .stream()
-                .filter(baseBallPlayer -> baseBallPlayer.isSameName(name))
-                .count()
-                > 0;
     }
 
     private void checkGame(boolean checkCondition) {
@@ -174,53 +91,31 @@ public class BaseBallGame {
     }
 
     private void pitch() throws BaseBallGameException {
-        validationPlayerList();
-        checkGame(isOverCount());
         while (!isGameOver()) {
-            pitchByPlayerList();
+            pitchByPlayer(baseBallPlayer);
+            checkGame(isOverCount());
         }
     }
-
-    private void validationPlayerList() throws BaseBallGameException {
-        if (!isPlayerExist()) {
-            throw new BaseBallGameException("참가 인원이 부족합니다.");
-        }
-    }
-
-    private boolean isPlayerExist() {
-        return baseBallPlayerList.size() > 0;
-    }
-
 
     private boolean isOverCount() {
         return pitchCount >= pitchLimit;
     }
 
-    private void pitchByPlayerList() {
-        int turn = 0;
-        while (!isGameOver() && isTurnNotOverPlayerSize(turn)) {
-            try {
-                pitchByPlayer(baseBallPlayerList.get(turn));
-            } catch (BaseBallGameException e) {
-                e.printMessage();
-                turn--;
-            } catch (ParsingException e) {
-                e.printMessage();
-                turn--;
-            }
-            turn++;
-            checkGame(isOverCount());
-        }
-    }
 
-    private boolean isTurnNotOverPlayerSize(int turn) {
-        final int playerSize = baseBallPlayerList.size();
-        return turn < playerSize;
-    }
-
-    private void pitchByPlayer(BaseBallPlayer baseBallPlayer) throws BaseBallGameException {
+    private void pitchByPlayer(BaseBallPlayer baseBallPlayer) {
         System.out.println((pitchCount + 1) + " / " + pitchLimit + " Pitching");
-        PitchResultList pitchResultList = getPitchResult(baseBallPlayer.getNumberList());
+        PitchResultList pitchResultList = null;
+        try {
+            pitchResultList = getPitchResult(baseBallPlayer.getNumberList());
+        } catch (BaseBallGameException e) {
+            e.printMessage();
+            pitchByPlayer(baseBallPlayer);
+            return;
+        } catch (ParsingException e) {
+            e.printMessage();
+            pitchByPlayer(baseBallPlayer);
+            return;
+        }
         pitchResultList.print();
         checkGame(pitchResultList.isAllStrike());
         pitchCount++;
