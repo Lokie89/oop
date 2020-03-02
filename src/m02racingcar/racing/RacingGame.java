@@ -2,6 +2,7 @@ package m02racingcar.racing;
 
 import m02racingcar.CustomScanner;
 import m02racingcar.Parsing;
+import m02racingcar.RandomNumberGenerator;
 import m02racingcar.exception.ParsingException;
 
 public class RacingGame {
@@ -32,7 +33,9 @@ public class RacingGame {
         printWinner();
     }
 
-    private void printWinner(){
+
+
+    private void printWinner() {
         final RacingCar winner = racingCarList.getBestPosition();
         System.out.println("우승자는 : ");
         winner.print();

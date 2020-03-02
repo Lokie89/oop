@@ -61,22 +61,11 @@ public class RacingCarList {
     public void step() {
         final int racingCarListSize = racingCarList.size();
         for (int i = 0; i < racingCarListSize; i++) {
-            step(racingCarList.get(i));
+            racingCarList.get(i).step();
         }
         print();
     }
 
-    private void step(RacingCar racingCar) {
-        if (isGoing()) {
-            racingCar.go();
-        }
-    }
-
-    private boolean isGoing() {
-        final int start = 1;
-        final int last = 10;
-        return RandomNumberGenerator.generate(start, last) > 5;
-    }
 
     public boolean haveOverPosition(int position) {
         return racingCarList

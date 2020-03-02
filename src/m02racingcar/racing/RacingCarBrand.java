@@ -1,6 +1,6 @@
 package m02racingcar.racing;
 
-public enum CarBrand {
+public enum RacingCarBrand {
     FERRARI(10),
     PORSCHE(9),
     LAMBORGHINI(8),
@@ -13,7 +13,7 @@ public enum CarBrand {
     NOBLE(1),
     ;
 
-    CarBrand(int speed) {
+    RacingCarBrand(int speed) {
         this.speed = speed;
     }
 
