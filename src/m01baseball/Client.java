@@ -1,6 +1,5 @@
 package m01baseball;
 
-import java.io.*;
 import java.net.Socket;
 
 public class Client {
