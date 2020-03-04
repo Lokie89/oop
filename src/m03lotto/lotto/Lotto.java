@@ -14,6 +14,7 @@ public class Lotto {
     public Lotto() {
         quiz = new QuizNumberList();
         setBettingList();
+        printLotto();
     }
 
     private void setBettingList() {
@@ -43,7 +44,7 @@ public class Lotto {
         return new BettingNumberList();
     }
 
-    public void printLotto() {
+    private void printLotto() {
         quiz.printLottoNumber();
         quiz.printBonusNumber();
         quiz.printResult(bettingList);
