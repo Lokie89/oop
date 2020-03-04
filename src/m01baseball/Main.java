@@ -1,6 +1,6 @@
-package m1baseball;
+package m01baseball;
 
-import m1baseball.game.baseball.BaseBallGame;
+import m01baseball.game.baseball.BaseBallGame;
 
 public class Main {
     public static void main(String[] args) {

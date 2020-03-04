@@ -1,4 +1,4 @@
-package m1baseball.exception;
+package m01baseball.exception;
 
 import java.util.NoSuchElementException;
 

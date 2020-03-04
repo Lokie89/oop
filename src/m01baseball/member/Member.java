@@ -1,4 +1,4 @@
-package m1baseball.member;
+package m01baseball.member;
 
 public class Member {
     protected final String name;

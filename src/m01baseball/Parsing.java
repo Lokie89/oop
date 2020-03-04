@@ -1,6 +1,6 @@
-package m1baseball;
+package m01baseball;
 
-import m1baseball.exception.ParsingException;
+import m01baseball.exception.ParsingException;
 
 public class Parsing {
 

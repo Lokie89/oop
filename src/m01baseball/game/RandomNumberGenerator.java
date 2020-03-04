@@ -1,4 +1,4 @@
-package m1baseball.game;
+package m01baseball.game;
 
 public class RandomNumberGenerator {
     public static int generate(int start, int last) {

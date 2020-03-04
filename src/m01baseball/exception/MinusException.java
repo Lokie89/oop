@@ -1,4 +1,4 @@
-package m1baseball.exception;
+package m01baseball.exception;
 
 public class MinusException extends Exception {
     private final String message;

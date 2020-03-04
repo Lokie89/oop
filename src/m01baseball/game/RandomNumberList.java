@@ -1,4 +1,4 @@
-package m1baseball.game;
+package m01baseball.game;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

@@ -1,7 +1,7 @@
-package m1baseball.game;
+package m01baseball.game;
 
-import m1baseball.Parsing;
-import m1baseball.exception.ParsingException;
+import m01baseball.Parsing;
+import m01baseball.exception.ParsingException;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

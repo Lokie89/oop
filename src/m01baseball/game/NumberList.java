@@ -1,6 +1,6 @@
-package m1baseball.game;
+package m01baseball.game;
 
-import m1baseball.game.baseball.BaseBallGameException;
+import m01baseball.game.baseball.BaseBallGameException;
 
 import java.util.ArrayList;
 import java.util.Collection;

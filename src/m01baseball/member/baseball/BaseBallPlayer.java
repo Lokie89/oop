@@ -1,9 +1,9 @@
-package m1baseball.member.baseball;
+package m01baseball.member.baseball;
 
-import m1baseball.exception.ParsingException;
-import m1baseball.game.CustomNumberList;
-import m1baseball.game.NumberList;
-import m1baseball.member.Member;
+import m01baseball.exception.ParsingException;
+import m01baseball.game.CustomNumberList;
+import m01baseball.game.NumberList;
+import m01baseball.member.Member;
 
 public class BaseBallPlayer extends Member {
 

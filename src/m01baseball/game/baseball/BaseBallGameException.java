@@ -1,4 +1,4 @@
-package m1baseball.game.baseball;
+package m01baseball.game.baseball;
 
 public class BaseBallGameException extends RuntimeException {
     private final String message;

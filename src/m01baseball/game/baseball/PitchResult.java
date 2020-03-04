@@ -1,6 +1,6 @@
-package m1baseball.game.baseball;
+package m01baseball.game.baseball;
 
-import m1baseball.exception.ContainException;
+import m01baseball.exception.ContainException;
 
 import java.util.Arrays;
 
