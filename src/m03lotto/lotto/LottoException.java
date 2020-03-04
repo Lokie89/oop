@@ -1,6 +1,6 @@
 package m03lotto.lotto;
 
-public class LottoException extends Exception {
+public class LottoException extends RuntimeException {
     private final String message;
 
     public LottoException() {

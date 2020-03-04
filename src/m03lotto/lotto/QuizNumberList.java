@@ -3,20 +3,27 @@ package m03lotto.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizNumberList extends LottoNumberList{
+public class QuizNumberList extends LottoNumberList {
     private final LottoNumber bonusNumber;
 
     public QuizNumberList() {
         super(new ArrayList<>());
         setLottoNumberList();
-        bonusNumber = getLottoNumber();
+        bonusNumber = getQuizLottoNumber();
     }
 
-    private boolean isContainLottoNumber(LottoNumber validateLottoNumber) {
-        return lottoNumberList
-                .stream()
-                .filter(lottoNumber -> lottoNumber.isEqualLottoNumber(validateLottoNumber))
-                .count() > 0;
+    private LottoNumber getQuizLottoNumber() {
+        LottoNumber lottoNumber = new LottoNumber();
+        try {
+            validateContainLottoNumber(lottoNumber);
+        } catch (LottoException e) {
+            return getQuizLottoNumber();
+        }
+        return lottoNumber;
+    }
+
+    private void setLottoNumber() {
+        addLottoNumber(getQuizLottoNumber());
     }
 
     private void setLottoNumberList() {
@@ -25,41 +32,26 @@ public class QuizNumberList extends LottoNumberList{
         }
     }
 
-    private void setLottoNumber() {
-        lottoNumberList.add(getLottoNumber());
-    }
-
-    private LottoNumber getLottoNumber() {
-        LottoNumber lottoNumber = new LottoNumber();
-        try {
-            validateLottoNumber(lottoNumber);
-        } catch (LottoException e) {
-            return getLottoNumber();
-        }
-        return lottoNumber;
-    }
-
-    private void validateLottoNumber(LottoNumber lottoNumber) throws LottoException {
-        if (isContainLottoNumber(lottoNumber)) {
-            throw new LottoException();
-        }
-    }
-
-    private boolean isLottoUnderSize() {
-        final int lottoSize = 6;
-        return lottoNumberList.size() < lottoSize;
-    }
-
-    public void print() {
-        final int lottoNumberListSize = lottoNumberList.size();
-        for (int i = 0; i < lottoNumberListSize; i++) {
-            lottoNumberList.get(i).print();
-            System.out.print(", ");
-        }
+    public void printBonusNumber() {
         System.out.print("bonus : ");
         bonusNumber.print();
         System.out.println();
     }
 
+    private boolean isContainBonus(LottoNumberList lottoNumberList) {
+        return lottoNumberList.isContainLottoNumber(bonusNumber);
+    }
+
+    private void printResult(long containCount, boolean isContainBonus) {
+        LottoGrade.howGrade((int) containCount, isContainBonus).print();
+    }
+
+    public void printResult(List<BettingNumberList> bettingList) {
+        for (LottoNumberList betting : bettingList) {
+            long containCount = getContainCount(betting);
+            betting.printLottoNumber();
+            printResult(containCount, isContainBonus(betting));
+        }
+    }
 
 }

@@ -10,6 +10,11 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
+    public LottoNumber(int lottoNumber) {
+        validateLottoNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
     private int getLottoNumber() {
         final int lowNumber = 1;
         final int highNumber = 45;
@@ -23,7 +28,7 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    private void validateLottoNumber(int lottoNumber) throws LottoException {
+    private void validateLottoNumber(int lottoNumber) {
         if (!isProfitLottoNumber(lottoNumber)) {
             throw new LottoException("1 ~ 45 사이의 숫자만 입력할 수 있습니다.");
         }
@@ -39,7 +44,8 @@ public class LottoNumber {
         return this.lottoNumber == lottoNumber.lottoNumber;
     }
 
-    public void print(){
+    public void print() {
         System.out.print(lottoNumber);
     }
+
 }

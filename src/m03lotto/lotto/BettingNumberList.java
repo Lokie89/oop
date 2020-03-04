@@ -1,61 +1,47 @@
 package m03lotto.lotto;
 
+import m03lotto.CustomScanner;
+import m03lotto.Parsing;
+import m03lotto.ParsingException;
+
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class BettingNumberList extends LottoNumberList {
-
     public BettingNumberList() {
         super(new ArrayList<>());
-        setLottoNumberList();
+        setBettingNumberList();
     }
 
-
-    private boolean isContainLottoNumber(LottoNumber validateLottoNumber) {
-        return lottoNumberList
-                .stream()
-                .filter(lottoNumber -> lottoNumber.isEqualLottoNumber(validateLottoNumber))
-                .count() > 0;
+    private void setBettingNumberList() {
+        while (isLottoUnderSize()) {
+            setBettingNumber();
+        }
     }
 
-    private void setLottoNumberList() {
-            setLottoNumber();
-    }
-
-    private void setLottoNumber() {
-        lottoNumberList.add(getLottoNumber());
-    }
-
-    private LottoNumber getLottoNumber() {
-        LottoNumber lottoNumber = new LottoNumber();
+    private void setBettingNumber() {
+        final int bettingNumberInt = getBettingNumberInt();
         try {
-            validateLottoNumber(lottoNumber);
+            LottoNumber bettingLottoNumber = new LottoNumber(bettingNumberInt);
+            validateContainLottoNumber(bettingLottoNumber);
+            addLottoNumber(bettingLottoNumber);
         } catch (LottoException e) {
-            return getLottoNumber();
+            e.printMessage();
+            setBettingNumber();
+            return;
+        }
+    }
+
+    private Integer getBettingNumberInt() {
+        final String info = (getSize() + 1) + "번째 로또 숫자를 입력하여 주세요.";
+        String lottoNumberStr = new CustomScanner(info).getFirstResponse()[0];
+        Integer lottoNumber;
+        try {
+            lottoNumber = Parsing.strToInteger(lottoNumberStr);
+        } catch (ParsingException e) {
+            e.printMessage();
+            return getBettingNumberInt();
         }
         return lottoNumber;
     }
-
-    private void validateLottoNumber(LottoNumber lottoNumber) throws LottoException {
-        if (isContainLottoNumber(lottoNumber)) {
-            throw new LottoException();
-        }
-    }
-
-    private boolean isLottoUnderSize() {
-        final int lottoSize = 6;
-        return lottoNumberList.size() < lottoSize;
-    }
-
-    public void print() {
-        final int lottoNumberListSize = lottoNumberList.size();
-        for (int i = 0; i < lottoNumberListSize; i++) {
-            lottoNumberList.get(i).print();
-            System.out.print(", ");
-        }
-        System.out.println();
-    }
-
 
 }
