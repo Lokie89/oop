@@ -4,7 +4,7 @@ import m01baseball.Parsing;
 import m01baseball.exception.ContainException;
 import m01baseball.exception.MinusException;
 import m01baseball.exception.ParsingException;
-import m01baseball.game.CustomScanner;
+import m01baseball.CustomScanner;
 import m01baseball.game.NumberList;
 import m01baseball.game.RandomNumberList;
 import m01baseball.member.baseball.BaseBallPlayer;
