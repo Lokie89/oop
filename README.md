@@ -21,3 +21,16 @@
         규칙 7: 2개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
         규칙 8: 일급 콜렉션을 쓴다.
         규칙 9: 게터/세터/프로퍼티를 쓰지 않는다.
+    
+    문제
+        01. baseball
+        02. racing car
+        03. lotto
+        04. string carculator
+        05. balckjack
+        06. ladder
+        07. find mine
+        08. chess
+        09. httpserver
+        10. framework
+        11. racing game
