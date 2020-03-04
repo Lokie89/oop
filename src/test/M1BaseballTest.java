@@ -2,7 +2,7 @@ package test;
 
 import m01baseball.Client;
 import m01baseball.Server;
-import m01baseball.game.CustomScanner;
+import m01baseball.CustomScanner;
 
 import java.io.IOException;
 

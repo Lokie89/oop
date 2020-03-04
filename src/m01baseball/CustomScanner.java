@@ -1,4 +1,4 @@
-package m01baseball.game;
+package m01baseball;
 
 import java.util.ArrayList;
 import java.util.List;
