@@ -1,5 +1,6 @@
 package m01baseball.game;
 
+import m01baseball.CustomScanner;
 import m01baseball.Parsing;
 import m01baseball.exception.ParsingException;
 
