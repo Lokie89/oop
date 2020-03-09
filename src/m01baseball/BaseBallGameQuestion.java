@@ -3,15 +3,10 @@ package m01baseball;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseBallGameQuestion {
-
-    private final List<BaseBallGameNumber> baseBallGameNumberList;
+public class BaseBallGameQuestion extends BaseBallGameNumberList{
 
     public BaseBallGameQuestion() {
-        List<BaseBallGameNumber> baseBallGameNumberList = getRandomBaseBallGameNumberList();
-        validateSize(baseBallGameNumberList);
-        validateGameNumber(baseBallGameNumberList);
-        this.baseBallGameNumberList = baseBallGameNumberList;
+        setBaseBallGameNumberList(getRandomBaseBallGameNumberList());
     }
 
     private List<BaseBallGameNumber> getRandomBaseBallGameNumberList() {
@@ -32,9 +27,4 @@ public class BaseBallGameQuestion {
         final int maxNumber = 9;
         return new RandomNumberGenerator(minNumber, maxNumber).getRandomNumber();
     }
-
-    public boolean isContainBaseBallGameNumber(BaseBallGameNumber baseBallGameNumber){
-        baseballgame
-    }
-
 }

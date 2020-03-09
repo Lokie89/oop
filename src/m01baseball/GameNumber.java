@@ -15,7 +15,7 @@ public class GameNumber {
         return gameNumber <= compareNumber;
     }
 
-    public boolean isSameNumber(int baseBallNumber) {
-        return this.gameNumber == baseBallNumber;
+    public boolean isSameNumber(GameNumber gameNumber) {
+        return this.gameNumber == gameNumber.gameNumber;
     }
 }
