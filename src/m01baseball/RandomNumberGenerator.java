@@ -1,5 +1,7 @@
 package m01baseball;
 
+import m01baseball.exception.RandomNumberGeneratorException;
+
 import java.util.Random;
 
 public class RandomNumberGenerator {

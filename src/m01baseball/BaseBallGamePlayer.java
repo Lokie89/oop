@@ -12,7 +12,7 @@ public class BaseBallGamePlayer extends Player {
     public BaseBallGameNumberList getBaseBallGameNumberList() {
         final String splitStr = ",";
         final String info = "숫자 3개를 입력하세요.";
-        String[] responses = new ScanResponse().getResponse(splitStr, info);
+        String[] responses = ScanResponse.getResponse(splitStr, info);
         return new BaseBallGameNumberList(getBaseBallGameNumberListByResponse(responses));
     }
 

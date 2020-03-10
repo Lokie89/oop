@@ -1,5 +1,7 @@
 package m01baseball;
 
+import m01baseball.exception.BaseBallGameNumberException;
+
 public class BaseBallGameNumber extends GameNumber {
 
     public BaseBallGameNumber(int baseBallNumber) {

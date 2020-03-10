@@ -18,4 +18,5 @@ public class GameNumber {
     public boolean isSameNumber(GameNumber gameNumber) {
         return this.gameNumber == gameNumber.gameNumber;
     }
+
 }

@@ -1,5 +1,9 @@
 package m01baseball;
 
+import m01baseball.exception.BaseBallGameNumberException;
+import m01baseball.exception.BaseBallGameNumberListDupliException;
+import m01baseball.exception.BaseBallGameNumberListSizeException;
+
 import java.util.List;
 
 public class BaseBallGameNumberList {
@@ -12,18 +16,35 @@ public class BaseBallGameNumberList {
     }
 
     public BaseBallGameNumberList(List<BaseBallGameNumber> baseBallGameNumberList) {
+        validateSize(baseBallGameNumberList);
+        validateGameNumber(baseBallGameNumberList);
+        validateDuplicate(baseBallGameNumberList);
         this.baseBallGameNumberList = baseBallGameNumberList;
     }
 
     protected void setBaseBallGameNumberList(List<BaseBallGameNumber> baseBallGameNumberList) {
         validateSize(baseBallGameNumberList);
         validateGameNumber(baseBallGameNumberList);
+        validateDuplicate(baseBallGameNumberList);
         this.baseBallGameNumberList = baseBallGameNumberList;
+    }
+
+    private void validateDuplicate(List<BaseBallGameNumber> baseBallGameNumberList) {
+        if (isContainAlready(baseBallGameNumberList)) {
+            throw new BaseBallGameNumberListDupliException();
+        }
+    }
+
+    private boolean isContainAlready(List<BaseBallGameNumber> baseBallGameNumberList) {
+        return baseBallGameNumberList
+                .stream()
+                .filter(baseBallGameNumber -> isContainNumber(baseBallGameNumberList, baseBallGameNumber))
+                .count() > 0;
     }
 
     private void validateSize(List<BaseBallGameNumber> baseBallGameNumberList) {
         if (!isProfitSize(baseBallGameNumberList, BASEBALL_NUMBER_SIZE)) {
-            throw new BaseBallGameNumberListException();
+            throw new BaseBallGameNumberListSizeException();
         }
     }
 
@@ -54,7 +75,7 @@ public class BaseBallGameNumberList {
 
     // 별로야
     public boolean[][] getContainSame(BaseBallGameNumberList baseBallGameAnswer) {
-        final int baseBallGameNumberListSize = baseBallGameNumberList.size();
+        final int baseBallGameNumberListSize = baseBallGameAnswer.size();
         boolean[][] containSame = new boolean[baseBallGameNumberListSize][2];
         for (int i = 0; i < baseBallGameNumberListSize; i++) {
             BaseBallGameNumber compareGameNumber = baseBallGameAnswer.baseBallGameNumberList.get(i);
@@ -71,11 +92,18 @@ public class BaseBallGameNumberList {
                 .count() > 0;
     }
 
+    private boolean isContainNumber(List<BaseBallGameNumber> baseBallGameNumberList, BaseBallGameNumber compareGameNumber) {
+        return baseBallGameNumberList
+                .stream()
+                .filter(baseBallGameNumber -> baseBallGameNumber.isSameNumber(compareGameNumber))
+                .count() > 1;
+    }
+
     private boolean isSameIndexNumber(BaseBallGameNumber compareGameNumber, int index) {
         return baseBallGameNumberList.get(index).isSameNumber(compareGameNumber);
     }
 
-    public int getBaseballNumberSize() {
+    public int size() {
         return baseBallGameNumberList.size();
     }
 
