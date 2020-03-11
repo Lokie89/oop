@@ -6,7 +6,7 @@ public class ScanResponse {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String[] getResponse(String splitStr, String info) {
-        info = info + " ( " + splitStr + " ) ";
+        info = info + " 구분 ( " + splitStr + " ) ";
         System.out.println(info);
         String response = scanner.nextLine();
         return response.split(splitStr);

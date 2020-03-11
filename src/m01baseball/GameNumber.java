@@ -7,15 +7,15 @@ public class GameNumber {
         this.gameNumber = gameNumber;
     }
 
-    public boolean biggerThan(int compareNumber) {
+    protected boolean biggerThan(int compareNumber) {
         return gameNumber >= compareNumber;
     }
 
-    public boolean lessThan(int compareNumber) {
+    protected boolean lessThan(int compareNumber) {
         return gameNumber <= compareNumber;
     }
 
-    public boolean isSameNumber(GameNumber gameNumber) {
+    protected boolean isSameNumber(GameNumber gameNumber) {
         return this.gameNumber == gameNumber.gameNumber;
     }
 

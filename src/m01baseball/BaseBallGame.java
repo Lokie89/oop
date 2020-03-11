@@ -7,11 +7,11 @@ import java.util.List;
 
 public class BaseBallGame {
 
-    private final BaseBallGameQuestion baseBallGameQuestion;
+    private final BaseBallGameNumberList baseBallGameQuestion;
     private int pitchableCount = 10;
     private BaseBallGamePlayer baseBallGamePlayer;
 
-    public BaseBallGame(BaseBallGameQuestion baseBallGameQuestion) {
+    public BaseBallGame(BaseBallGameNumberList baseBallGameQuestion) {
         this.baseBallGameQuestion = baseBallGameQuestion;
         setBaseBallGamePlayer();
     }
@@ -32,28 +32,33 @@ public class BaseBallGame {
                 | RandomNumberGeneratorException
                 | BaseBallGameNumberException
                 | BaseBallGameNumberListSizeException e) {
-            manageException(e);
+            managePlayException(e);
             return;
         }
         end();
     }
 
-    private void manageException(BaseBallGameException e) {
+    private void managePlayException(BaseBallGameException e) {
         e.print();
         play();
     }
 
 
-    public void setBaseBallGamePlayer() {
+    private void setBaseBallGamePlayer() {
         final String info = "이름을 입력하세요";
         baseBallGamePlayer = new BaseBallGamePlayer(ScanResponse.getResponse(info));
     }
 
     private boolean pitchAndResult() {
+        printPitchableCount();
         baseBallGamePlayer.print();
         BaseBallGameRuleList baseBallGameRuleList = new BaseBallGameRuleList(confirmRule(getAnswer()));
         baseBallGameRuleList.print();
         return baseBallGameRuleList.getStrikeCount() != baseBallGameQuestion.size();
+    }
+
+    private void printPitchableCount(){
+        System.out.println(pitchableCount+" / 10");
     }
 
     private BaseBallGameNumberList getAnswer() {

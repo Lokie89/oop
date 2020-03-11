@@ -1,12 +1,29 @@
 package m01baseball;
 
+import m01baseball.exception.BaseBallGameException;
+import m01baseball.exception.BaseBallGameNumberException;
+import m01baseball.exception.BaseBallGameNumberListDupliException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseBallGameQuestion extends BaseBallGameNumberList{
+public class BaseBallGameQuestion extends BaseBallGameNumberList {
 
     public BaseBallGameQuestion() {
-        setBaseBallGameNumberList(getRandomBaseBallGameNumberList());
+        setBaseBallQuestion();
+    }
+
+    private void setBaseBallQuestion() {
+        try {
+            setBaseBallGameNumberList(getRandomBaseBallGameNumberList());
+        } catch (BaseBallGameNumberListDupliException
+                | BaseBallGameNumberException e) {
+            manageQuestionException(e);
+        }
+    }
+
+    private void manageQuestionException(BaseBallGameException e) {
+        setBaseBallQuestion();
     }
 
     private List<BaseBallGameNumber> getRandomBaseBallGameNumberList() {
