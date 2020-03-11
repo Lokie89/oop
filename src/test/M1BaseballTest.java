@@ -14,7 +14,6 @@ public class M1BaseballTest extends Thread {
         final int max = 9;
         final int randomNumber = new RandomNumberGenerator(min, max).getRandomNumber();
         Assert.assertTrue(min <= randomNumber && randomNumber <= max);
-        Assert.assertTrue(new BaseBallGameNumber(3).isSameNumber(new BaseBallGameNumber(3)));
 //        Assert.assertTrue(new BaseBallGameNumber(5).isSameNumber(3));
 
         List<BaseBallGameNumber> baseBallGameNumbers1 = new ArrayList<>();
