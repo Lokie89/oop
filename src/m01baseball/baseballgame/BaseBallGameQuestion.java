@@ -1,5 +1,6 @@
-package m01baseball;
+package m01baseball.baseballgame;
 
+import m01baseball.RandomNumberGenerator;
 import m01baseball.exception.BaseBallGameException;
 import m01baseball.exception.BaseBallGameNumberException;
 import m01baseball.exception.BaseBallGameNumberListDupliException;

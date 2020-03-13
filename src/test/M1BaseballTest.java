@@ -1,8 +1,8 @@
 package test;
 
-import m01baseball.BaseBallGame;
-import m01baseball.BaseBallGameNumber;
-import m01baseball.BaseBallGameNumberList;
+import m01baseball.baseballgame.BaseBallGame;
+import m01baseball.baseballgame.BaseBallGameNumber;
+import m01baseball.baseballgame.BaseBallGameNumberList;
 import m01baseball.RandomNumberGenerator;
 
 import java.util.ArrayList;

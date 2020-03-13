@@ -1,5 +1,6 @@
-package m01baseball;
+package m01baseball.baseballgame;
 
+import m01baseball.ScanResponse;
 import m01baseball.exception.*;
 
 import java.util.ArrayList;
@@ -8,15 +9,25 @@ import java.util.List;
 public class BaseBallGame {
 
     private final BaseBallGameNumberList baseBallGameQuestion;
-    private int pitchableCount = 10;
+    private final int pitchableLimit = 10;
+    private int pitchableCount;
     private BaseBallGamePlayer baseBallGamePlayer;
 
-    public BaseBallGame(BaseBallGameNumberList baseBallGameQuestion) {
+    public BaseBallGame(BaseBallGameNumberList baseBallGameQuestion, int pitchableCount) {
         this.baseBallGameQuestion = baseBallGameQuestion;
+        this.pitchableCount = pitchableCount;
         setBaseBallGamePlayer();
     }
 
+    public BaseBallGame(int pitchableCount) {
+        this.pitchableCount = pitchableCount;
+        baseBallGameQuestion = new BaseBallGameQuestion();
+        setBaseBallGamePlayer();
+
+    }
+
     public BaseBallGame() {
+        pitchableCount = pitchableLimit;
         baseBallGameQuestion = new BaseBallGameQuestion();
         setBaseBallGamePlayer();
     }
@@ -54,11 +65,11 @@ public class BaseBallGame {
         baseBallGamePlayer.print();
         BaseBallGameRuleList baseBallGameRuleList = new BaseBallGameRuleList(confirmRule(getAnswer()));
         baseBallGameRuleList.print();
-        return baseBallGameRuleList.getStrikeCount() != baseBallGameQuestion.size();
+        return baseBallGameRuleList.isAllStrike();
     }
 
-    private void printPitchableCount(){
-        System.out.println(pitchableCount+" / 10");
+    private void printPitchableCount() {
+        System.out.println(pitchableCount + " / " + pitchableLimit);
     }
 
     private BaseBallGameNumberList getAnswer() {

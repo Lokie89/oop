@@ -10,7 +10,4 @@ public class Parsing {
             throw new ParsingException();
         }
     }
-    public static String intToString(Integer integer) throws ParsingException{
-        return String.valueOf(integer);
-    }
 }

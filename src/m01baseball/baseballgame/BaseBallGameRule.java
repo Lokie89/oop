@@ -1,4 +1,4 @@
-package m01baseball;
+package m01baseball.baseballgame;
 
 import java.util.Arrays;
 

@@ -1,12 +1,14 @@
-package m01baseball;
+package m01baseball.baseballgame;
 
 import m01baseball.exception.BaseBallGameNumberException;
 
-public class BaseBallGameNumber extends GameNumber {
+public class BaseBallGameNumber {
 
-    public BaseBallGameNumber(int baseBallNumber) {
-        super(baseBallNumber);
-        validateBaseBallNumber(baseBallNumber);
+    private final int baseballGameNumber;
+
+    public BaseBallGameNumber(int baseballGameNumber) {
+        validateBaseBallNumber(baseballGameNumber);
+        this.baseballGameNumber = baseballGameNumber;
     }
 
     private void validateBaseBallNumber(int baseBallNumber) {
@@ -27,6 +29,18 @@ public class BaseBallGameNumber extends GameNumber {
 
     private boolean lessThan(int compareNumber1, int compareNumber2) {
         return compareNumber1 <= compareNumber2;
+    }
+
+    public boolean biggerThan(int compareNumber) {
+        return baseballGameNumber >= compareNumber;
+    }
+
+    public boolean lessThan(int compareNumber) {
+        return baseballGameNumber <= compareNumber;
+    }
+
+    public boolean isSameNumber(BaseBallGameNumber baseballGameNumber) {
+        return this.baseballGameNumber == baseballGameNumber.baseballGameNumber;
     }
 
 }

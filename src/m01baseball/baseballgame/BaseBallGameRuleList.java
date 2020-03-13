@@ -1,4 +1,4 @@
-package m01baseball;
+package m01baseball.baseballgame;
 
 import java.util.List;
 
@@ -17,15 +17,15 @@ public class BaseBallGameRuleList {
                 ;
     }
 
-    public long getStrikeCount() {
+    private long getStrikeCount() {
         return getResultCount(BaseBallGameRule.STRIKE);
     }
 
-    public long getBallCount() {
+    private long getBallCount() {
         return getResultCount(BaseBallGameRule.BALL);
     }
 
-    public long getOutCount() {
+    private long getOutCount() {
         return getResultCount(BaseBallGameRule.OUT);
     }
 
@@ -34,6 +34,10 @@ public class BaseBallGameRuleList {
         System.out.print(getBallCount() + BaseBallGameRule.BALL.name() + " ");
         System.out.print(getOutCount() + BaseBallGameRule.OUT.name() + " ");
         System.out.println();
+    }
+
+    public boolean isAllStrike() {
+        return getStrikeCount() == baseBallGameRuleList.size();
     }
 
 }

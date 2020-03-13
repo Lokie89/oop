@@ -1,4 +1,8 @@
-package m01baseball;
+package m01baseball.baseballgame;
+
+import m01baseball.Parsing;
+import m01baseball.Player;
+import m01baseball.ScanResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +15,12 @@ public class BaseBallGamePlayer extends Player {
 
     public BaseBallGameNumberList getBaseBallGameNumberList() {
         final String splitStr = ",";
-        final String info = "숫자 3개를 입력하세요.";
+        final String info = "숫자 " + BaseBallGameNumberList.BASEBALL_NUMBER_SIZE + "개를 입력하세요.";
         String[] responses = ScanResponse.getResponse(splitStr, info);
         return new BaseBallGameNumberList(getBaseBallGameNumberListByResponse(responses));
     }
 
-    private List<BaseBallGameNumber> getBaseBallGameNumberListByResponse(String[] responses){
+    private List<BaseBallGameNumber> getBaseBallGameNumberListByResponse(String[] responses) {
         List<BaseBallGameNumber> baseBallGameNumberList = new ArrayList<>();
         for (String response : responses) {
             baseBallGameNumberList.add(new BaseBallGameNumber(strToInteger(response)));

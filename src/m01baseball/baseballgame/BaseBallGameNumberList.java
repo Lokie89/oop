@@ -1,4 +1,4 @@
-package m01baseball;
+package m01baseball.baseballgame;
 
 import m01baseball.exception.BaseBallGameNumberException;
 import m01baseball.exception.BaseBallGameNumberListDupliException;
@@ -43,7 +43,7 @@ public class BaseBallGameNumberList {
     }
 
     private void validateSize(List<BaseBallGameNumber> baseBallGameNumberList) {
-        if (!isProfitSize(baseBallGameNumberList, BASEBALL_NUMBER_SIZE)) {
+        if (!isProfitSize(baseBallGameNumberList)) {
             throw new BaseBallGameNumberListSizeException();
         }
     }
@@ -57,8 +57,8 @@ public class BaseBallGameNumberList {
     }
 
 
-    private boolean isProfitSize(List<BaseBallGameNumber> baseBallGameNumberList, int size) {
-        return baseBallGameNumberList.size() == size;
+    private boolean isProfitSize(List<BaseBallGameNumber> baseBallGameNumberList) {
+        return baseBallGameNumberList.size() == BASEBALL_NUMBER_SIZE;
     }
 
     private boolean isProfitGameNumber(List<BaseBallGameNumber> baseBallGameNumberList, int min, int max) {

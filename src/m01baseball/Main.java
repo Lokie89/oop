@@ -1,7 +1,6 @@
 package m01baseball;
 
-import java.util.ArrayList;
-import java.util.List;
+import m01baseball.baseballgame.BaseBallGame;
 
 public class Main {
     public static void main(String[] args) {
