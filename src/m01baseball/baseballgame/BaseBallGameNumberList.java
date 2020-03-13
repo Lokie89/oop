@@ -27,6 +27,7 @@ public class BaseBallGameNumberList {
         validateGameNumber(baseBallGameNumberList);
         validateDuplicate(baseBallGameNumberList);
         this.baseBallGameNumberList = baseBallGameNumberList;
+
     }
 
     private void validateDuplicate(List<BaseBallGameNumber> baseBallGameNumberList) {
