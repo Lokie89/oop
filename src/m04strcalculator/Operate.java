@@ -1,5 +1,5 @@
 package m04strcalculator;
 
-public interface Operate {
-    public void operate();
+public interface Operate<T> {
+    void operate(T operator, T number2);
 }
