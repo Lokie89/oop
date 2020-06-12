@@ -21,7 +21,7 @@ public class M4StringCalculator {
         // split
         // validate
         // operate
-        Calculate stringCalculator = new StringCalculator(question, splitStr);
+        Calculator stringCalculator = new StringCalculator(question, splitStr);
         stringCalculator.calculate();
     }
 }

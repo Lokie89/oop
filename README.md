@@ -27,7 +27,7 @@
         02. racing car
         03. lotto
         04. string carculator
-        05. balckjack
+        05. blackjack
         06. ladder
         07. find mine
         08. chess

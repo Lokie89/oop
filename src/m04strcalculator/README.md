@@ -6,5 +6,5 @@
     1. 사칙연산을 수행 할 메서드
     2. 문자열을 나눠 줄 메서드
 #### 테스트코드
-    1. OperatorContainer . operate(double number1, Operator operator, double number2)
-    2. OperatorContainer . operate(Operator operator, double number2)
+    1. OperatorContainer . operate(double number1, Operator operatorType, double number2)
+    2. OperatorContainer . operate(Operator operatorType, double number2)

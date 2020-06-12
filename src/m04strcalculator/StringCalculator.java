@@ -1,10 +1,10 @@
 package m04strcalculator;
 
-public class StringCalculator implements Calculate {
+public class StringCalculator implements Calculator {
 
     String[] calculateStrArr;
 
-    StringOperateContainer stringOperateContainer;
+    StringOperatorContainer stringOperateContainer;
 
     public StringCalculator(String calculateStr, String splitStr) {
         splitString(calculateStr, splitStr);
@@ -23,7 +23,7 @@ public class StringCalculator implements Calculate {
 
     @Override
     public void calculate() {
-        stringOperateContainer = new StringOperateContainer(calculateStrArr[0]);
+        stringOperateContainer = new StringOperatorContainer(calculateStrArr[0]);
         for (int i = 1; i < calculateStrArr.length; i += 2) {
             stringOperateContainer.operate(calculateStrArr[i], calculateStrArr[i + 1]);
         }

@@ -1,5 +1,5 @@
 package m04strcalculator;
 
-public interface Calculate {
+public interface Calculator {
     void calculate();
 }

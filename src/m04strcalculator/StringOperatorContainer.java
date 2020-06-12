@@ -2,18 +2,18 @@ package m04strcalculator;
 
 import java.util.NoSuchElementException;
 
-public class StringOperateContainer implements Operate<String> {
+public class StringOperatorContainer implements Operator<String> {
 
     private double result;
 
-    public StringOperateContainer(String numberStr) {
+    public StringOperatorContainer(String numberStr) {
         this.result = validateAvailableOperate(numberStr);
     }
 
     @Override
     public void operate(String operatorStr, String numberStr) {
         try {
-            this.result = Operator.getOperator(operatorStr)
+            this.result = OperatorType.getOperator(operatorStr)
                     .calculate(this.result, validateAvailableOperate(numberStr));
         } catch (NoSuchElementException e) {
             throw new UnavailableCalculateException();
