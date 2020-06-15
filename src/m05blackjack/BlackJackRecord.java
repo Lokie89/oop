@@ -1,5 +1,7 @@
 package m05blackjack;
 
+import m05blackjack.card.CardList;
+
 public class BlackJackRecord {
 
     private static final int BLACKJACK_POINT = 21;
@@ -31,9 +33,13 @@ public class BlackJackRecord {
     }
 
     public void compareRecord(BlackJackRecord blackJackRecord) {
-        checkBlackJackFlag(blackJackRecord);
-        checkBurstFlag(blackJackRecord);
-        checkSum(blackJackRecord);
+        try {
+            checkBlackJackFlag(blackJackRecord);
+            checkBurstFlag(blackJackRecord);
+            checkSum(blackJackRecord);
+        } catch (BlackJackGameEndException e) {
+            e.printException();
+        }
     }
 
     private void checkBlackJackFlag(BlackJackRecord blackJackRecord) {
@@ -68,7 +74,7 @@ public class BlackJackRecord {
         if (this.sum < blackJackRecord.sum) {
             throw new BlackJackGameEndException("숫자로 짐");
         }
-        throw new BlackJackGameEndException("숫자로 짐");
+        throw new BlackJackGameEndException("숫자로 비김");
     }
 
 

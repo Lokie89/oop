@@ -1,4 +1,4 @@
-package m05blackjack;
+package m05blackjack.card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class CardList {
         return getSize() <= 0;
     }
 
-    public int getSize(){
+    public int getSize() {
         return cardList.size();
     }
 }

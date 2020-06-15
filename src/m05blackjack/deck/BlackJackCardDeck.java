@@ -1,10 +1,15 @@
-package m05blackjack;
+package m05blackjack.deck;
+
+import m05blackjack.card.BlackJackCardNumber;
+import m05blackjack.card.Card;
+import m05blackjack.card.CardList;
+import m05blackjack.card.CardType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BlackJackCardDeck {
+public class BlackJackCardDeck implements CardDeck {
     private CardList cardList;
 
     public BlackJackCardDeck() {

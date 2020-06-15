@@ -12,7 +12,7 @@
 #### 고민
     1. 카드를 뽑는 행위 ( Participant ) interface - Gamer, Dealer
     2. 게임의 승패를 확인하는 행위 ( WinOrLose ) interface - BlackJack
-    3. 랜덤으로 섞이는 기능 ( Mix ) interface - CardDeck
+    3. 랜덤으로 섞이는 기능 ( CardDeck ) interface - CardDeck
     
     4. 카드모양 ( CardType ) enum 
     5. 카드숫자 ( CardNumber ) enum

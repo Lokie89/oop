@@ -1,6 +1,14 @@
 package test;
 
 import m05blackjack.*;
+import m05blackjack.card.BlackJackCardNumber;
+import m05blackjack.card.Card;
+import m05blackjack.card.CardList;
+import m05blackjack.card.CardType;
+import m05blackjack.deck.BlackJackCardDeck;
+import m05blackjack.participant.BlackJackGameDealerHitRuleException;
+import m05blackjack.participant.BlackJackDealer;
+import m05blackjack.participant.BlackJackGamer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +36,15 @@ public class M5BlackJackTest {
     }
 
     private static void hitCard() {
-        Gamer gamer = new Gamer();
+        BlackJackGamer blackJackGamer = new BlackJackGamer();
         BlackJackCardDeck cardDeck = new BlackJackCardDeck();
-        gamer.printCard();
-        gamer.hit(cardDeck);
-        gamer.printCard();
-        gamer.hit(cardDeck);
-        gamer.printCard();
-        gamer.hit(cardDeck);
-        gamer.printCard();
+        blackJackGamer.printCard();
+        blackJackGamer.hit(cardDeck);
+        blackJackGamer.printCard();
+        blackJackGamer.hit(cardDeck);
+        blackJackGamer.printCard();
+        blackJackGamer.hit(cardDeck);
+        blackJackGamer.printCard();
     }
 
     private static void throwGameEnd() {
@@ -49,34 +57,30 @@ public class M5BlackJackTest {
 
     private static void recordTest() {
         BlackJackCardDeck cardDeck = new BlackJackCardDeck();
-        Gamer gamer = new Gamer();
-        Dealer dealer = new Dealer();
+        BlackJackGamer blackJackGamer = new BlackJackGamer();
+        BlackJackDealer blackJackDealer = new BlackJackDealer();
 
 
         for (int i = 0; i < 3; i++) {
 
             try {
-                gamer.hit(cardDeck);
+                blackJackGamer.hit(cardDeck);
                 System.out.println("GAMER -- ");
-                gamer.printCard();
+                blackJackGamer.printCard();
 
-                dealer.hit(cardDeck);
+                blackJackDealer.hit(cardDeck);
                 System.out.println("DEALER -- ");
-                dealer.printCard();
-            } catch (BlackJackGameDealerUnavailableHitException e) {
+                blackJackDealer.printCard();
+            } catch (BlackJackGameDealerHitRuleException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
         }
 
 
-        BlackJackRecord gamerRecord = gamer.checkCard();
-        BlackJackRecord dealerRecord = dealer.checkCard();
-        try {
-            gamerRecord.compareRecord(dealerRecord);
-        } catch (BlackJackGameEndException e) {
-            System.out.println(e.getMessage());
-        }
+        BlackJackRecord gamerRecord = blackJackGamer.checkCard();
+        BlackJackRecord dealerRecord = blackJackDealer.checkCard();
+        gamerRecord.compareRecord(dealerRecord);
 
     }
 

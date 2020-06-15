@@ -1,4 +1,4 @@
-package m05blackjack;
+package m05blackjack.card;
 
 public enum BlackJackCardNumber {
     A(1),
