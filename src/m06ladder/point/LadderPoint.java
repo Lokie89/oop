@@ -1,7 +1,23 @@
 package m06ladder.point;
 
 public class LadderPoint implements Point {
+
     private int ladderPoint;
+
+    public LadderPoint() {
+    }
+
+    public LadderPoint(LadderPoint ladderPoint) {
+        this.ladderPoint = ladderPoint.ladderPoint;
+    }
+
+    public LadderPoint(int ladderPoint) {
+        this.ladderPoint = ladderPoint;
+    }
+    @Override
+    public void print() {
+        System.out.print(ladderPoint);
+    }
 
     @Override
     public void increase() {
@@ -20,4 +36,5 @@ public class LadderPoint implements Point {
         }
         return super.equals(obj);
     }
+
 }
