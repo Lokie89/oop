@@ -1,13 +1,16 @@
 package m06ladder.person;
 
-import m06ladder.Location;
 import m06ladder.point.LadderPoint;
 import m06ladder.point.Point;
 
-public class LadderGamer extends Location implements Person {
+public class LadderGamer implements Person {
+    private LadderPoint pointY;
+    private LadderPoint pointX;
 
-    public LadderGamer(Point pointX) {
-        super(new LadderPoint(1), pointX);
+
+    public LadderGamer(LadderPoint pointX) {
+        this.pointY = new LadderPoint(1);
+        this.pointX = pointX;
     }
 
     @Override
@@ -28,6 +31,11 @@ public class LadderGamer extends Location implements Person {
     @Override
     public void goRight() {
         pointX.increase();
+    }
+
+    @Override
+    public void print() {
+        pointX.print();
     }
 
     public boolean isFinish(Point finishPoint) {

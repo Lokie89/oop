@@ -36,7 +36,8 @@ public class LadderGame {
         while (!gamer.isFinish(new LadderPoint(11))) {
             ladderList.move(gamer);
         }
-        gamer.pointX.print();
+        gamer.print();
+        System.out.println();
     }
 
 }

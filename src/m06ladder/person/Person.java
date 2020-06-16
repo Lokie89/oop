@@ -5,4 +5,5 @@ public interface Person {
     void goDown();
     void goLeft();
     void goRight();
+    void print();
 }

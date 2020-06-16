@@ -27,21 +27,22 @@ public class LadderList {
         gamer.goDown();
     }
 
-    private boolean isOnBridgeLeft(Location gamer) {
+    private boolean isOnBridgeLeft(LadderGamer gamer) {
         return ladderList
                 .stream()
-                .filter(ladder -> ladder.isLeftLocation(gamer))
+                .filter(ladder -> ladder.isOnBridgeLeft(gamer))
                 .count()
                 > 0
                 ;
     }
 
-    private boolean isOnBridgeRight(Location gamer){
+    private boolean isOnBridgeRight(LadderGamer gamer){
         return ladderList
                 .stream()
-                .filter(ladder -> ladder.isSameLocation(gamer))
+                .filter(ladder -> ladder.isOnBridgeRight(gamer))
                 .count()
                 > 0
                 ;
     }
+
 }

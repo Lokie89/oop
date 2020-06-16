@@ -4,13 +4,6 @@ public class LadderPoint implements Point {
 
     private int ladderPoint;
 
-    public LadderPoint() {
-    }
-
-    public LadderPoint(LadderPoint ladderPoint) {
-        this.ladderPoint = ladderPoint.ladderPoint;
-    }
-
     public LadderPoint(int ladderPoint) {
         this.ladderPoint = ladderPoint;
     }
@@ -35,6 +28,10 @@ public class LadderPoint implements Point {
             return ladderPoint == ((LadderPoint) obj).ladderPoint;
         }
         return super.equals(obj);
+    }
+
+    public boolean isBiggerThan(LadderPoint point){
+        return ladderPoint > point.ladderPoint;
     }
 
 }
