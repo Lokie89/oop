@@ -1,5 +1,6 @@
-package m06ladder;
+package m06ladder.game;
 
+import m06ladder.LadderList;
 import m06ladder.ladder.Ladder;
 import m06ladder.person.LadderGamer;
 import m06ladder.point.LadderPoint;
@@ -7,7 +8,7 @@ import m06ladder.point.LadderPoint;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LadderGame {
+public class LadderGame implements Game{
     private LadderList ladderList;
     private LadderGamer gamer;
 
@@ -32,12 +33,12 @@ public class LadderGame {
         gamer = new LadderGamer(new LadderPoint(6));
     }
 
+    @Override
     public void play() {
         while (!gamer.isFinish(new LadderPoint(11))) {
             ladderList.move(gamer);
         }
         gamer.print();
-        System.out.println();
     }
 
 }

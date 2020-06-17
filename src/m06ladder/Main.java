@@ -1,11 +1,11 @@
 package m06ladder;
 
+import m06ladder.game.Game;
+import m06ladder.game.LadderGame;
+
 public class Main {
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
-        new LadderGame().play();
-        long endTime = System.currentTimeMillis();
-        long differ = endTime - startTime;
-        System.out.println(differ + "초");
+        Game ladderGame = new LadderGame();
+        ladderGame.play();
     }
 }
