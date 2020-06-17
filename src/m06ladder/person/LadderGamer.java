@@ -1,16 +1,13 @@
 package m06ladder.person;
 
+import m06ladder.Location;
 import m06ladder.point.LadderPoint;
 import m06ladder.point.Point;
 
-public class LadderGamer implements Person {
-    private LadderPoint pointY;
-    private LadderPoint pointX;
-
+public class LadderGamer extends Location implements Person {
 
     public LadderGamer(LadderPoint pointX) {
-        this.pointY = new LadderPoint(1);
-        this.pointX = pointX;
+        super(new LadderPoint(1), pointX);
     }
 
     @Override

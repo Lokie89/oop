@@ -30,8 +30,4 @@ public class LadderPoint implements Point {
         return super.equals(obj);
     }
 
-    public boolean isBiggerThan(LadderPoint point){
-        return ladderPoint > point.ladderPoint;
-    }
-
 }

@@ -15,12 +15,12 @@ public class LadderList {
 
     public void move(LadderGamer gamer) {
         if (isOnBridgeLeft(gamer)) {
-            gamer.goLeft();
+            gamer.goRight();
             gamer.goDown();
             return;
         }
         if (isOnBridgeRight(gamer)) {
-            gamer.goRight();
+            gamer.goLeft();
             gamer.goDown();
             return;
         }

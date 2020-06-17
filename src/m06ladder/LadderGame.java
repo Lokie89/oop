@@ -29,7 +29,7 @@ public class LadderGame {
         ladderList.add(new Ladder(new LadderPoint(5), new LadderPoint(5)));
         ladderList.add(new Ladder(new LadderPoint(7), new LadderPoint(5)));
         this.ladderList = new LadderList(ladderList);
-        gamer = new LadderGamer(new LadderPoint(3));
+        gamer = new LadderGamer(new LadderPoint(6));
     }
 
     public void play() {
