@@ -1,7 +1,6 @@
 package m06ladder.ladder;
 
 import m06ladder.Location;
-import m06ladder.person.LadderGamer;
 import m06ladder.person.Person;
 import m06ladder.point.LadderPoint;
 

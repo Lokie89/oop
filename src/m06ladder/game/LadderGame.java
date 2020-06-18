@@ -12,25 +12,9 @@ public class LadderGame implements Game{
     private LadderList ladderList;
     private LadderGamer gamer;
 
-    public LadderGame() {
-        List<Ladder> ladderList = new ArrayList<>();
-        ladderList.add(new Ladder(new LadderPoint(1), new LadderPoint(1)));
-        ladderList.add(new Ladder(new LadderPoint(6), new LadderPoint(1)));
-        ladderList.add(new Ladder(new LadderPoint(9), new LadderPoint(1)));
-        ladderList.add(new Ladder(new LadderPoint(3), new LadderPoint(2)));
-        ladderList.add(new Ladder(new LadderPoint(5), new LadderPoint(2)));
-        ladderList.add(new Ladder(new LadderPoint(8), new LadderPoint(2)));
-        ladderList.add(new Ladder(new LadderPoint(4), new LadderPoint(3)));
-        ladderList.add(new Ladder(new LadderPoint(7), new LadderPoint(3)));
-        ladderList.add(new Ladder(new LadderPoint(10), new LadderPoint(3)));
-        ladderList.add(new Ladder(new LadderPoint(2), new LadderPoint(4)));
-        ladderList.add(new Ladder(new LadderPoint(6), new LadderPoint(4)));
-        ladderList.add(new Ladder(new LadderPoint(8), new LadderPoint(4)));
-        ladderList.add(new Ladder(new LadderPoint(3), new LadderPoint(5)));
-        ladderList.add(new Ladder(new LadderPoint(5), new LadderPoint(5)));
-        ladderList.add(new Ladder(new LadderPoint(7), new LadderPoint(5)));
+    public LadderGame(List<Ladder> ladderList, int startPoint) {
         this.ladderList = new LadderList(ladderList);
-        gamer = new LadderGamer(new LadderPoint(3));
+        gamer = new LadderGamer(new LadderPoint(startPoint));
     }
 
     @Override
