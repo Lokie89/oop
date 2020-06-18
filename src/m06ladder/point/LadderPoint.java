@@ -7,6 +7,7 @@ public class LadderPoint implements Point {
     public LadderPoint(int ladderPoint) {
         this.ladderPoint = ladderPoint;
     }
+
     @Override
     public void print() {
         System.out.print(ladderPoint);
@@ -30,4 +31,8 @@ public class LadderPoint implements Point {
         return super.equals(obj);
     }
 
+    @Override
+    public boolean isBigger(LadderPoint ladderPoint) {
+        return this.ladderPoint > ladderPoint.ladderPoint;
+    }
 }

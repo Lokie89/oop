@@ -31,12 +31,12 @@ public class LadderGamer extends Location implements Person {
     }
 
     @Override
-    public void print() {
+    public void printX() {
         pointX.print();
     }
 
-    public boolean isFinish(Point finishPoint) {
-        return pointY.equals(finishPoint);
+    public boolean isFinish(LadderPoint finishPoint) {
+        return pointY.isBigger(finishPoint);
     }
 
 }

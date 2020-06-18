@@ -1,8 +1,9 @@
 package m06ladder;
 
+import m06ladder.person.Person;
 import m06ladder.point.LadderPoint;
 
-public class Location {
+public class Location implements Comparable {
     protected LadderPoint pointY;
     protected LadderPoint pointX;
 
@@ -12,15 +13,39 @@ public class Location {
     }
 
     // Y 포인트와, X 포인트가 같을 때
-    protected boolean isOnBridgeLeft(Location personLocation) {
-        return pointY.equals(personLocation.pointY) && pointX.equals(personLocation.pointX);
+    protected boolean isOnBridgeLeft(Person person) {
+        return equals(person);
     }
 
     // Y 포인트는 같고, X 포인트가 하나 적은 것
-    protected boolean isOnBridgeRight(Location personLocation) {
+    protected boolean isOnBridgeRight(Person person) {
         pointX.increase();
-        final boolean isOnBridgeRight = isOnBridgeLeft(personLocation);
+        final boolean isOnBridgeRight = isOnBridgeLeft(person);
         pointX.decrease();
         return isOnBridgeRight;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (!(o instanceof Location)) {
+            throw new CannotCastLocationException();
+        }
+        Location compareLocation = (Location) o;
+        if (this.pointY.isBigger(compareLocation.pointY)) {
+            return 1;
+        }
+        if (compareLocation.pointY.isBigger(this.pointY)) {
+            return -1;
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Location){
+            Location compareLocation = (Location)obj;
+            return pointY.equals(compareLocation.pointY) && pointX.equals(compareLocation.pointX);
+        }
+        return super.equals(obj);
     }
 }

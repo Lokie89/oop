@@ -30,15 +30,15 @@ public class LadderGame implements Game{
         ladderList.add(new Ladder(new LadderPoint(5), new LadderPoint(5)));
         ladderList.add(new Ladder(new LadderPoint(7), new LadderPoint(5)));
         this.ladderList = new LadderList(ladderList);
-        gamer = new LadderGamer(new LadderPoint(6));
+        gamer = new LadderGamer(new LadderPoint(3));
     }
 
     @Override
     public void play() {
-        while (!gamer.isFinish(new LadderPoint(11))) {
+        while (!gamer.isFinish(new LadderPoint(10))) {
             ladderList.move(gamer);
         }
-        gamer.print();
+        gamer.printX();
     }
 
 }

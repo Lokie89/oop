@@ -4,6 +4,7 @@ import m06ladder.ladder.Ladder;
 import m06ladder.person.LadderGamer;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LadderList {
 
@@ -11,38 +12,23 @@ public class LadderList {
 
     public LadderList(List<Ladder> ladderList) {
         this.ladderList = ladderList;
+//        validateLadderList(ladderList);
+        sortLadderList();
     }
 
     public void move(LadderGamer gamer) {
-        if (isOnBridgeLeft(gamer)) {
-            gamer.goRight();
-            gamer.goDown();
-            return;
-        }
-        if (isOnBridgeRight(gamer)) {
-            gamer.goLeft();
-            gamer.goDown();
-            return;
-        }
+        ladderList
+                .stream()
+                .forEach(ladder -> ladder.cross(gamer));
         gamer.goDown();
     }
 
-    private boolean isOnBridgeLeft(LadderGamer gamer) {
-        return ladderList
+    private void sortLadderList() {
+        this.ladderList = this.ladderList
                 .stream()
-                .filter(ladder -> ladder.isOnBridgeLeft(gamer))
-                .count()
-                > 0
-                ;
-    }
-
-    private boolean isOnBridgeRight(LadderGamer gamer){
-        return ladderList
-                .stream()
-                .filter(ladder -> ladder.isOnBridgeRight(gamer))
-                .count()
-                > 0
-                ;
+                .sorted(Location::compareTo)
+                .collect(Collectors.toList())
+        ;
     }
 
 }
