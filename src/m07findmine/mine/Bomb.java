@@ -6,10 +6,18 @@ public class Bomb implements Mine {
     private boolean isExplosive;
     private boolean isFound;
 
+    public Bomb() {
+    }
+
     public Bomb(boolean isExplosive) {
         this.isExplosive = isExplosive;
         isFound = false;
     }
+
+    protected void setExplosive(boolean isExplosive) {
+        this.isExplosive = isExplosive;
+    }
+
 
     @Override
     public void findBomb() {
@@ -25,10 +33,10 @@ public class Bomb implements Mine {
 
     @Override
     public void print() {
-        if(isFound){
-            System.out.print(isExplosive+" ");
+        if (isFound) {
+            System.out.print("■");
             return;
         }
-        System.out.print("Closed ");
+        System.out.print("□");
     }
 }

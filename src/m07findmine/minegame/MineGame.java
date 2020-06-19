@@ -1,6 +1,7 @@
 package m07findmine.minegame;
 
 import m07findmine.MineExploreException;
+import m07findmine.FindAllMineException;
 import m07findmine.mineboard.MineBoard;
 import m07findmine.mineboard.MineList;
 import m07findmine.miner.MineGamer;
@@ -19,6 +20,10 @@ public class MineGame implements Game {
                 miner.dig(mineBoard);
                 mineBoard.print();
             } catch (MineExploreException e) {
+                System.out.println(e.getMessage());
+                break;
+            } catch (FindAllMineException e){
+                System.out.println(e.getMessage());
                 break;
             }
         }

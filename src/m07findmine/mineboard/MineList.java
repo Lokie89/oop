@@ -1,12 +1,11 @@
 package m07findmine.mineboard;
 
-import m07findmine.mine.Bomb;
+import m07findmine.FindAllMineException;
 import m07findmine.mine.Mine;
+import m07findmine.mine.RandomBomb;
 import m07findmine.point.Point;
 
 import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class MineList implements MineBoard {
     private Mine[][] mineArray;
@@ -37,18 +36,8 @@ public class MineList implements MineBoard {
     private void setMineRows(Mine[] mines, final int bombPercentage) {
         final int minesLength = mines.length;
         for (int i = 0; i < minesLength; i++) {
-            mines[i] = getRandomBomb(bombPercentage);
+            mines[i] = new RandomBomb(bombPercentage);
         }
-    }
-
-    private Bomb getRandomBomb(int percentage) {
-        boolean isExplosive = false;
-        Random random = new Random();
-        int randomNumber = random.nextInt(100);
-        if (randomNumber < percentage) {
-            isExplosive = true;
-        }
-        return new Bomb(isExplosive);
     }
 
     private void printRows(Mine[] mines) {
@@ -62,5 +51,14 @@ public class MineList implements MineBoard {
         final int indexX = x.getPoint() - 1;
         final int indexY = y.getPoint() - 1;
         mineArray[indexX][indexY].findBomb();
+        checkFoundMine();
     }
+
+    private void checkFoundMine() {
+        if (false) {
+            throw new FindAllMineException();
+        }
+    }
+
+
 }

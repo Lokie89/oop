@@ -3,7 +3,7 @@ package m06ladder;
 import m06ladder.person.Person;
 import m06ladder.point.LadderPoint;
 
-public class Location implements Comparable {
+public class Location implements Comparable<Location> {
     protected LadderPoint pointY;
     protected LadderPoint pointX;
 
@@ -26,11 +26,7 @@ public class Location implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (!(o instanceof Location)) {
-            throw new CannotCastLocationException();
-        }
-        Location compareLocation = (Location) o;
+    public int compareTo(Location compareLocation) {
         if (this.pointY.isBigger(compareLocation.pointY)) {
             return 1;
         }
