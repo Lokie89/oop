@@ -10,15 +10,15 @@ public class Ladder extends Location implements Bridge {
     }
 
     @Override
-    public void cross(Person gamer) {
-        if (isOnBridgeLeft(gamer)) {
-            gamer.goRight();
-            gamer.goDown();
+    public void cross(Person person) {
+        if (isOnBridgeLeft(person)) {
+            person.goRight();
+            person.goDown();
             return;
         }
-        if (isOnBridgeRight(gamer)) {
-            gamer.goLeft();
-            gamer.goDown();
+        if (isOnBridgeRight(person)) {
+            person.goLeft();
+            person.goDown();
             return;
         }
     }

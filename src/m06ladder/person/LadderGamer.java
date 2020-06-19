@@ -2,7 +2,6 @@ package m06ladder.person;
 
 import m06ladder.Location;
 import m06ladder.point.LadderPoint;
-import m06ladder.point.Point;
 
 public class LadderGamer extends Location implements Person {
 

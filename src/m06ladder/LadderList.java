@@ -12,14 +12,15 @@ public class LadderList {
 
     public LadderList(List<Ladder> ladderList) {
         this.ladderList = ladderList;
-//        validateLadderList(ladderList);
+        validateLadderList();
         sortLadderList();
     }
 
     public void move(LadderGamer gamer) {
         ladderList
                 .stream()
-                .forEach(ladder -> ladder.cross(gamer));
+                .forEach(ladder -> ladder.cross(gamer))
+        ;
         gamer.goDown();
     }
 
@@ -29,6 +30,10 @@ public class LadderList {
                 .sorted(Location::compareTo)
                 .collect(Collectors.toList())
         ;
+    }
+
+    private void validateLadderList(){
+
     }
 
 }
