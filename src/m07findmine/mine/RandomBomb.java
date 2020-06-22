@@ -5,12 +5,12 @@ import java.util.Random;
 public class RandomBomb extends Bomb {
 
     public RandomBomb(final int bombPercentage) {
-        boolean isExplosive = false;
+        boolean isBomb = false;
         Random random = new Random();
         int randomNumber = random.nextInt(100);
         if (randomNumber < bombPercentage) {
-            isExplosive = true;
+            isBomb = true;
         }
-        setExplosive(isExplosive);
+        setBomb(isBomb);
     }
 }

@@ -9,10 +9,14 @@ import java.util.Arrays;
 
 public class MineList implements MineBoard {
     private Mine[][] mineArray;
+    private int bombsCount;
+    private int dugPointsCount;
 
     public MineList(int mineBoardSize, int bombPercentage) {
         mineArray = new Mine[mineBoardSize][mineBoardSize];
         setMineArray(bombPercentage);
+        setBombsCount();
+        System.out.println("폭탄 " + bombsCount + "개");
     }
 
     public MineList(Mine[][] mineArray) {
@@ -51,13 +55,48 @@ public class MineList implements MineBoard {
         final int indexX = x.getPoint() - 1;
         final int indexY = y.getPoint() - 1;
         mineArray[indexX][indexY].findBomb();
+        setDugPointsCount();
         checkFoundMine();
     }
 
     private void checkFoundMine() {
-        if (false) {
+        if (isEqualBombCountAndNotDugPointCount()) {
             throw new FindAllMineException();
         }
+    }
+
+    private boolean isEqualBombCountAndNotDugPointCount() {
+        final int columnsLength = this.mineArray.length;
+        final int rowsLength = this.mineArray[0].length;
+        return bombsCount == (columnsLength * rowsLength - dugPointsCount);
+    }
+
+    private void setBombsCount() {
+        for (Mine[] mines : mineArray) {
+            setBombCount(mines);
+        }
+    }
+
+    private void setBombCount(Mine[] mines) {
+        this.bombsCount = (int) Arrays.asList(mines)
+                .stream()
+                .filter(Mine::isBomb)
+                .count()
+        ;
+    }
+
+    private void setDugPointsCount() {
+        for (Mine[] mines : mineArray) {
+            setDugPointsCount(mines);
+        }
+    }
+
+    private void setDugPointsCount(Mine[] mines) {
+        this.dugPointsCount = (int) Arrays.asList(mines)
+                .stream()
+                .filter(Mine::isFound)
+                .count()
+        ;
     }
 
 
