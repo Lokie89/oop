@@ -19,7 +19,7 @@ public class RandomNumberGenerator implements Generatable<Integer> {
 
     private void validateExcludeNumbers() {
         if (isGeneratedNumberIncludedInExcludeNumbers()) {
-            throw new GeneratedNumberIsIncludeInExcludeNumbersException();
+            throw new GeneratedSthIsIncludeInExcludeSthsException();
         }
     }
 
@@ -34,7 +34,7 @@ public class RandomNumberGenerator implements Generatable<Integer> {
         generate();
         try {
             validateExcludeNumbers();
-        } catch (GeneratedNumberIsIncludeInExcludeNumbersException e) {
+        } catch (GeneratedSthIsIncludeInExcludeSthsException e) {
             getGenerated();
         }
         return generatedNumber;

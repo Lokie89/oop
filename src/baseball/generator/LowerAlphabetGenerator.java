@@ -1,14 +1,12 @@
 package baseball.generator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-public class RandomNumberGenerator implements Generatable<Integer> {
-    private final List<Integer> excludeNumbers;
-    private final int min;
-    private final int max;
-    private Integer generatedNumber;
+public class LowerAlphabetGenerator implements Generatable<Character> {
+    private final Set<Character> excludeAlphabets;
+    private final int min = 97;
+    private final int max = 123;
+    private Character generatedAlphabet;
 
     private int getBound() {
         return max - min;
@@ -16,64 +14,50 @@ public class RandomNumberGenerator implements Generatable<Integer> {
 
     private void generate() {
         Random random = new Random();
-        generatedNumber = random.nextInt(getBound()) + min;
+        generatedAlphabet = (char) (random.nextInt(getBound()) + min);
     }
 
     private void validateExcludeNumbers() {
         if (isGeneratedNumberIncludedInExcludeNumbers()) {
-            throw new GeneratedNumberIsIncludeInExcludeNumbersException();
+            throw new GeneratedSthIsIncludeInExcludeSthsException();
         }
     }
 
     private boolean isGeneratedNumberIncludedInExcludeNumbers() {
-        return excludeNumbers.stream()
-                .filter(n -> n == generatedNumber)
+        return excludeAlphabets.stream()
+                .filter(n -> n.equals(generatedAlphabet))
                 .count() > 0;
     }
 
     @Override
-    public Integer getGenerated() {
+    public Character getGenerated() {
         generate();
         try {
             validateExcludeNumbers();
-        } catch (GeneratedNumberIsIncludeInExcludeNumbersException e) {
+        } catch (GeneratedSthIsIncludeInExcludeSthsException e) {
             getGenerated();
         }
-        return generatedNumber;
+        return generatedAlphabet;
     }
 
     public static class Builder {
 
-        private final List<Integer> excludeNumbers = new ArrayList<>();
-        private int min = 0;
-        private int max = 1;
+        private final Set<Character> excludeAlphabets = new HashSet<>();
 
         // Arrays.asList() 사용 하면 타입매개 변수로 받아야 하는데 그럼 null 체크 해줘야됨
-        public Builder excludeNumbers(int... numbers) {
-            for (int number : numbers) {
-                excludeNumbers.add(number);
+        public Builder excludeCharacters(char... characters) {
+            for (char character : characters) {
+                excludeAlphabets.add(character);
             }
             return this;
         }
 
-        public Builder max(int value) {
-            this.max = value;
-            return this;
-        }
-
-        public Builder min(int value) {
-            this.min = value;
-            return this;
-        }
-
-        public RandomNumberGenerator build() {
-            return new RandomNumberGenerator(this);
+        public LowerAlphabetGenerator build() {
+            return new LowerAlphabetGenerator(this);
         }
     }
 
-    public RandomNumberGenerator(Builder builder) {
-        this.excludeNumbers = builder.excludeNumbers;
-        this.min = builder.min;
-        this.max = builder.max;
+    public LowerAlphabetGenerator(Builder builder) {
+        this.excludeAlphabets = builder.excludeAlphabets;
     }
 }
