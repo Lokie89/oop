@@ -1,9 +1,11 @@
 package baseball.generator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class RandomNumberGenerator implements Generatable<Integer> {
-    private final Set<Integer> excludeNumbers;
+    private final List<Integer> excludeNumbers;
     private final int min;
     private final int max;
     private Integer generatedNumber;
@@ -42,7 +44,7 @@ public class RandomNumberGenerator implements Generatable<Integer> {
 
     public static class Builder {
 
-        private final Set<Integer> excludeNumbers = new HashSet<>();
+        private final List<Integer> excludeNumbers = new ArrayList<>();
         private int min = 0;
         private int max = 1;
 
