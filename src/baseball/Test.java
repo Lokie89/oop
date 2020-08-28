@@ -6,8 +6,8 @@ import baseball.generator.RandomNumberGenerator;
 import test.Assert;
 
 public class Test {
-    public static void main(String[] args) {
 
+    private static void randomNumberGeneratorTest() {
         RandomNumberGenerator.Builder randomNumberGeneratorBuilder = new RandomNumberGenerator.Builder();
         int max = 6;
         int[] excludeNumbers = new int[]{
@@ -26,8 +26,9 @@ public class Test {
         for (int excludeNumber : excludeNumbers) {
             Assert.assertTrue(generatedNumber != excludeNumber);
         }
+    }
 
-
+    private static void lowerAlphabetGeneratorTest() {
         LowerAlphabetGenerator.Builder lowerAlphabetGeneratorBuilder = new LowerAlphabetGenerator.Builder();
         char[] excludeCharacters = new char[]{
                 'a', 'b', 'c', 'd'
@@ -44,7 +45,12 @@ public class Test {
         for (char excludeCharacter : excludeCharacters) {
             Assert.assertTrue(generatedCharacter != excludeCharacter);
         }
+    }
 
+    public static void main(String[] args) {
+
+        randomNumberGeneratorTest();
+        lowerAlphabetGeneratorTest();
 
     }
 }
