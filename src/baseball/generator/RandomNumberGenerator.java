@@ -2,13 +2,18 @@ package baseball.generator;
 
 import java.util.*;
 
+/**
+ * Build 패턴 이용한 random number 추출 클래스
+ * @author Lokie89
+ */
 public class RandomNumberGenerator implements Generatable<Integer> {
     private final Set<Integer> excludeNumbers;
     private final int min;
     private final int max;
     private Integer generatedNumber;
 
-    private int getBound() {
+    @Override
+    public int getBound() {
         return max - min;
     }
 
@@ -54,8 +59,9 @@ public class RandomNumberGenerator implements Generatable<Integer> {
             return this;
         }
 
+        // max 까지 포함 추출
         public Builder max(int value) {
-            this.max = value;
+            this.max = value + 1;
             return this;
         }
 

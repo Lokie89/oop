@@ -65,10 +65,35 @@ public class Test {
         }
     }
 
-    public static void main(String[] args) {
+    private static void baseBallNumberTest() {
+        final int max = 9;
+        BaseBallNumber baseBallNumber = new BaseBallNumber(
+                new RandomNumberGenerator.Builder()
+                        .max(max)
+                        .build()
+        );
+        Assert.assertTrue(baseBallNumber.hashCode() < max);
+    }
 
+    private static void baseBallNumbersTest() {
+
+        final int max = 9;
+        final int size = 3;
+        BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
+                new RandomNumberGenerator.Builder()
+                        .max(max)
+                        .build(),
+                size
+        );
+        System.out.println(baseBallNumbers.toString());
+
+    }
+
+    public static void main(String[] args) {
         randomNumberGeneratorTest();
         lowerAlphabetGeneratorTest();
         upperAlphabetGeneratorTest();
+        baseBallNumberTest();
+        baseBallNumbersTest();
     }
 }

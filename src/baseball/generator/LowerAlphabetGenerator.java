@@ -8,7 +8,8 @@ public class LowerAlphabetGenerator implements Generatable<Character> {
     private final int max = 123;
     private Character generatedAlphabet;
 
-    private int getBound() {
+    @Override
+    public int getBound() {
         return max - min;
     }
 

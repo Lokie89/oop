@@ -38,4 +38,9 @@ public class BaseBallNumber {
     public int hashCode() {
         return baseBallNumber;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(baseBallNumber);
+    }
 }
