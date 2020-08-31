@@ -23,7 +23,7 @@ public class Test {
 
         int generatedNumber = randomNumberGenerator.getGenerated();
 
-        Assert.assertTrue(generatedNumber < max);
+        Assert.assertTrue(generatedNumber <= max);
         for (int excludeNumber : excludeNumbers) {
             Assert.assertTrue(generatedNumber != excludeNumber);
         }
@@ -72,21 +72,54 @@ public class Test {
                         .max(max)
                         .build()
         );
-        Assert.assertTrue(baseBallNumber.hashCode() < max);
+        Assert.assertTrue(baseBallNumber.hashCode() <= max);
     }
 
     private static void baseBallNumbersTest() {
+        final int max = 9;
+        final int size = 4;
+        BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
+                size,
+                new RandomNumberGenerator.Builder()
+                        .max(max)
+                        .build()
+        );
+        System.out.println(baseBallNumbers.toString());
+    }
 
+    private static void baseBallNumbersTest2() {
+        final int size = 3;
+        final int[] baseBallNums = new int[]{
+                3, 4, 5
+        };
+        BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
+                size,
+                baseBallNums
+        );
+        System.out.println(baseBallNumbers.toString());
+    }
+
+    private static void baseBallNumbersTest3() {
         final int max = 9;
         final int size = 3;
         BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
+                size,
                 new RandomNumberGenerator.Builder()
                         .max(max)
-                        .build(),
-                size
+                        .build()
         );
         System.out.println(baseBallNumbers.toString());
 
+        final int[] baseBallNums = new int[]{
+                3, 4, 5
+        };
+        BaseBallNumbers baseBallNumbers2 = new BaseBallNumbers(
+                size,
+                baseBallNums
+        );
+        System.out.println(baseBallNumbers2.toString());
+
+        System.out.println(baseBallNumbers.getCompareRecord(baseBallNumbers2));
     }
 
     public static void main(String[] args) {
@@ -95,5 +128,7 @@ public class Test {
         upperAlphabetGeneratorTest();
         baseBallNumberTest();
         baseBallNumbersTest();
+        baseBallNumbersTest2();
+        baseBallNumbersTest3();
     }
 }

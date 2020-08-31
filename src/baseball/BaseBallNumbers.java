@@ -1,36 +1,53 @@
 package baseball;
 
+import baseball.common.PitchingRecord;
 import baseball.generator.Generatable;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BaseBallNumbers {
     // 순서 보장
     private final Set<BaseBallNumber> baseBallNumbers = new LinkedHashSet<>();
 
-    public BaseBallNumbers(Generatable<Integer> generator, int size) {
-        generateBaseBallNumber(generator, size);
+    public BaseBallNumbers(int size, Generatable<Integer> generator) {
+        validateFillableBound(size, generator.getBound());
+        generateBaseBallNumbers(size, generator);
     }
 
-    private void generateBaseBallNumber(Generatable<Integer> generator, int size) {
-        validateFillableBound(generator, size);
-        while (!isFullBaseBallNumbers(size)) {
+    public BaseBallNumbers(int size, int... baseBallNumbers) {
+        validateFillableBound(size, baseBallNumbers.length);
+        generateBaseBallNumbers(size, baseBallNumbers);
+    }
+
+    private void generateBaseBallNumbers(int size, Generatable<Integer> generator) {
+        while (!isSameSize(size)) {
             baseBallNumbers.add(getBaseBallNumber(generator));
         }
     }
 
-    private void validateFillableBound(Generatable<Integer> generator, int size) {
-        if (!isFillableBound(generator, size)) {
+    private void generateBaseBallNumbers(int size, int[] baseBallNumbers) {
+        for (int baseBallNumber : baseBallNumbers) {
+            this.baseBallNumbers.add(new BaseBallNumber(baseBallNumber));
+        }
+        if (!isSameSize(size)) {
             throw new IllegalBaseBallNumbersSizeException();
         }
     }
 
-    private boolean isFillableBound(Generatable<Integer> generator, int size) {
-        return generator.getBound() >= size;
+    private void validateFillableBound(int size, int baseballNumbersSize) {
+        if (!isFillableBound(size, baseballNumbersSize)) {
+            throw new IllegalBaseBallNumbersSizeException();
+        }
     }
 
-    private boolean isFullBaseBallNumbers(int size) {
+    private boolean isFillableBound(int size, int baseballNumbersSize) {
+        return baseballNumbersSize >= size;
+    }
+
+    private boolean isSameSize(int size) {
         return baseBallNumbers.size() == size;
     }
 
@@ -40,6 +57,26 @@ public class BaseBallNumbers {
         } catch (UnboundedBaseBallNumberException e) {
             return getBaseBallNumber(generator);
         }
+    }
+
+
+    public List<PitchingRecord> getCompareRecord(BaseBallNumbers compareBaseBallNumbers) {
+        List<PitchingRecord> pitchingRecordList = new ArrayList<>();
+        if (!isSameSize(compareBaseBallNumbers.baseBallNumbers.size())) {
+            throw new IllegalBaseBallNumbersSizeException();
+        }
+        BaseBallNumber[] baseBallNumbers = baseBallNumbersSetToArray(this.baseBallNumbers);
+        BaseBallNumber[] compareBaseBallNums = baseBallNumbersSetToArray(compareBaseBallNumbers.baseBallNumbers);
+        for (int i = 0; i < baseBallNumbers.length; i++) {
+            boolean sameIndex = baseBallNumbers[i].equals(compareBaseBallNums[i]);
+            boolean containNumber = compareBaseBallNumbers.baseBallNumbers.contains(baseBallNumbers[i]);
+            pitchingRecordList.add(PitchingRecord.getPitchingRecord(sameIndex, containNumber));
+        }
+        return pitchingRecordList;
+    }
+
+    private BaseBallNumber[] baseBallNumbersSetToArray(Set<BaseBallNumber> baseBallNumberSet) {
+        return baseBallNumberSet.toArray(new BaseBallNumber[baseBallNumberSet.size()]);
     }
 
     @Override

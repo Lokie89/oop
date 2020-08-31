@@ -13,6 +13,11 @@ public class BaseBallNumber {
         baseBallNumber = generatedNumber;
     }
 
+    public BaseBallNumber(int baseBallNumber) {
+        validateBaseBallNumber(baseBallNumber);
+        this.baseBallNumber = baseBallNumber;
+    }
+
     private void validateBaseBallNumber(Integer number) {
         if (!isBoundedBaseBallNumber(number)) {
             throw new UnboundedBaseBallNumberException();
