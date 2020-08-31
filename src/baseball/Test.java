@@ -3,6 +3,7 @@ package baseball;
 import baseball.generator.Generatable;
 import baseball.generator.LowerAlphabetGenerator;
 import baseball.generator.RandomNumberGenerator;
+import baseball.generator.UpperAlphabetGenerator;
 import test.Assert;
 
 public class Test {
@@ -41,7 +42,24 @@ public class Test {
 
         char generatedCharacter = lowerAlphabetGenerator.getGenerated();
 
-        System.out.println(generatedCharacter);
+        for (char excludeCharacter : excludeCharacters) {
+            Assert.assertTrue(generatedCharacter != excludeCharacter);
+        }
+    }
+
+    private static void upperAlphabetGeneratorTest() {
+        UpperAlphabetGenerator.Builder upperAlphabetGeneratorBuilder = new UpperAlphabetGenerator.Builder();
+        char[] excludeCharacters = new char[]{
+                'A', 'B', 'C', 'D'
+        };
+        upperAlphabetGeneratorBuilder = upperAlphabetGeneratorBuilder
+                .excludeCharacters(excludeCharacters)
+        ;
+        Generatable<Character> upperAlphabetGenerator =
+                upperAlphabetGeneratorBuilder.build();
+
+        char generatedCharacter = upperAlphabetGenerator.getGenerated();
+
         for (char excludeCharacter : excludeCharacters) {
             Assert.assertTrue(generatedCharacter != excludeCharacter);
         }
@@ -51,6 +69,6 @@ public class Test {
 
         randomNumberGeneratorTest();
         lowerAlphabetGeneratorTest();
-
+        upperAlphabetGeneratorTest();
     }
 }
