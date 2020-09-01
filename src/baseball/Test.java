@@ -107,7 +107,7 @@ public class Test {
         System.out.println(baseBallNumbers.toString());
     }
 
-    private static List<PitchingRecord> baseBallNumbersTest3() {
+    private static Recordable baseBallNumbersTest3() {
         final int max = 9;
         final int size = 3;
         BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
@@ -126,8 +126,7 @@ public class Test {
                 baseBallNums
         );
         System.out.println(baseBallNumbers2.toString());
-        List<PitchingRecord> pitchingRecordList = baseBallNumbers.getCompareRecord(baseBallNumbers2);
-        return pitchingRecordList;
+        return baseBallNumbers.getCompareRecord(baseBallNumbers2);
     }
 
     private static void judgeableTest() {
@@ -142,7 +141,7 @@ public class Test {
         );
 
         final int[] baseBallNums2 = new int[]{
-                3, 5, 4
+                3, 4, 5
         };
         BaseBallNumbers baseBallNumbers2 = new BaseBallNumbers(
                 size,
@@ -151,7 +150,7 @@ public class Test {
 
 
 
-        Recordable pitchingRecords = new PitchingRecords(baseBallNumbers.getCompareRecord(baseBallNumbers2));
+        Recordable pitchingRecords = baseBallNumbers.getCompareRecord(baseBallNumbers2);
         Referee referee = new Referee();
         referee.judge(pitchingRecords);
         System.out.println(pitchingRecords);

@@ -2,6 +2,8 @@ package baseball.baseballnumber;
 
 import baseball.record.PitchingRecord;
 import baseball.generator.Generatable;
+import baseball.record.PitchingRecords;
+import baseball.record.Recordable;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -60,7 +62,7 @@ public class BaseBallNumbers {
     }
 
 
-    public List<PitchingRecord> getCompareRecord(BaseBallNumbers compareBaseBallNumbers) {
+    public Recordable getCompareRecord(BaseBallNumbers compareBaseBallNumbers) {
         List<PitchingRecord> pitchingRecordList = new ArrayList<>();
         if (!isSameSize(compareBaseBallNumbers.baseBallNumbers.size())) {
             throw new IllegalBaseBallNumbersSizeException();
@@ -72,7 +74,7 @@ public class BaseBallNumbers {
             boolean containNumber = compareBaseBallNumbers.baseBallNumbers.contains(baseBallNumbers[i]);
             pitchingRecordList.add(PitchingRecord.getPitchingRecord(sameIndex, containNumber));
         }
-        return pitchingRecordList;
+        return new PitchingRecords(pitchingRecordList);
     }
 
     private BaseBallNumber[] baseBallNumbersSetToArray(Set<BaseBallNumber> baseBallNumberSet) {
