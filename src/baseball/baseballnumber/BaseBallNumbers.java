@@ -1,4 +1,4 @@
-package baseball;
+package baseball.baseballnumber;
 
 import baseball.record.PitchingRecord;
 import baseball.generator.Generatable;
