@@ -1,7 +1,6 @@
-package baseball.common;
+package baseball.record;
 
 import java.util.Arrays;
-import java.util.TreeMap;
 
 public enum PitchingRecord {
     STRIKE(true, true),

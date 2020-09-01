@@ -1,6 +1,6 @@
 package baseball;
 
-import baseball.common.PitchingRecord;
+import baseball.record.PitchingRecord;
 import baseball.generator.Generatable;
 
 import java.util.ArrayList;

@@ -1,10 +1,18 @@
 package baseball;
 
+import baseball.record.Recordable;
+import baseball.refree.Judgeable;
+import baseball.record.PitchingRecord;
+import baseball.record.PitchingRecords;
 import baseball.generator.Generatable;
 import baseball.generator.LowerAlphabetGenerator;
 import baseball.generator.RandomNumberGenerator;
 import baseball.generator.UpperAlphabetGenerator;
+import baseball.refree.Referee;
 import test.Assert;
+
+import java.util.List;
+import java.util.Optional;
 
 public class Test {
 
@@ -99,7 +107,7 @@ public class Test {
         System.out.println(baseBallNumbers.toString());
     }
 
-    private static void baseBallNumbersTest3() {
+    private static List<PitchingRecord> baseBallNumbersTest3() {
         final int max = 9;
         final int size = 3;
         BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
@@ -118,9 +126,37 @@ public class Test {
                 baseBallNums
         );
         System.out.println(baseBallNumbers2.toString());
-
-        System.out.println(baseBallNumbers.getCompareRecord(baseBallNumbers2));
+        List<PitchingRecord> pitchingRecordList = baseBallNumbers.getCompareRecord(baseBallNumbers2);
+        return pitchingRecordList;
     }
+
+    private static void judgeableTest() {
+
+        final int size = 3;
+        final int[] baseBallNums = new int[]{
+                3, 4, 5
+        };
+        BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
+                size,
+                baseBallNums
+        );
+
+        final int[] baseBallNums2 = new int[]{
+                3, 5, 4
+        };
+        BaseBallNumbers baseBallNumbers2 = new BaseBallNumbers(
+                size,
+                baseBallNums2
+        );
+
+
+
+        Recordable pitchingRecords = new PitchingRecords(baseBallNumbers.getCompareRecord(baseBallNumbers2));
+        Referee referee = new Referee();
+        referee.judge(pitchingRecords);
+        System.out.println(pitchingRecords);
+    }
+
 
     public static void main(String[] args) {
         randomNumberGeneratorTest();
@@ -130,5 +166,6 @@ public class Test {
         baseBallNumbersTest();
         baseBallNumbersTest2();
         baseBallNumbersTest3();
+        judgeableTest();
     }
 }
