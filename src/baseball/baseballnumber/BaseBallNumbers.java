@@ -3,14 +3,14 @@ package baseball.baseballnumber;
 import baseball.record.PitchingRecord;
 import baseball.generator.Generatable;
 import baseball.record.PitchingRecords;
-import baseball.record.Recordable;
+import baseball.record.Decidable;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BaseBallNumbers {
+public class BaseBallNumbers implements Recordable<BaseBallNumbers>{
     // 순서 보장
     private final Set<BaseBallNumber> baseBallNumbers = new LinkedHashSet<>();
 
@@ -61,12 +61,13 @@ public class BaseBallNumbers {
         }
     }
 
-
-    public Recordable getCompareRecord(BaseBallNumbers compareBaseBallNumbers) {
-        List<PitchingRecord> pitchingRecordList = new ArrayList<>();
+    // TODO : refactor
+    @Override
+    public Decidable getCompareRecord(BaseBallNumbers compareBaseBallNumbers) {
         if (!isSameSize(compareBaseBallNumbers.baseBallNumbers.size())) {
             throw new IllegalBaseBallNumbersSizeException();
         }
+        List<PitchingRecord> pitchingRecordList = new ArrayList<>();
         BaseBallNumber[] baseBallNumbers = baseBallNumbersSetToArray(this.baseBallNumbers);
         BaseBallNumber[] compareBaseBallNums = baseBallNumbersSetToArray(compareBaseBallNumbers.baseBallNumbers);
         for (int i = 0; i < baseBallNumbers.length; i++) {

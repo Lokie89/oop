@@ -2,17 +2,14 @@ package baseball;
 
 import baseball.baseballnumber.BaseBallNumber;
 import baseball.baseballnumber.BaseBallNumbers;
-import baseball.record.Recordable;
-import baseball.record.PitchingRecord;
-import baseball.record.PitchingRecords;
+import baseball.record.Decidable;
 import baseball.generator.Generatable;
 import baseball.generator.LowerAlphabetGenerator;
 import baseball.generator.RandomNumberGenerator;
 import baseball.generator.UpperAlphabetGenerator;
+import baseball.refree.BaseBallReferee;
 import baseball.refree.Referee;
 import test.Assert;
-
-import java.util.List;
 
 public class Test {
 
@@ -107,7 +104,7 @@ public class Test {
         System.out.println(baseBallNumbers.toString());
     }
 
-    private static Recordable baseBallNumbersTest3() {
+    private static Decidable baseBallNumbersTest3() {
         final int max = 9;
         final int size = 3;
         BaseBallNumbers baseBallNumbers = new BaseBallNumbers(
@@ -150,8 +147,8 @@ public class Test {
 
 
 
-        Recordable pitchingRecords = baseBallNumbers.getCompareRecord(baseBallNumbers2);
-        Referee referee = new Referee();
+        Decidable pitchingRecords = baseBallNumbers.getCompareRecord(baseBallNumbers2);
+        Referee referee = new BaseBallReferee();
         referee.judge(pitchingRecords);
         System.out.println(pitchingRecords);
     }

@@ -3,7 +3,7 @@ package baseball.record;
 import java.util.Arrays;
 import java.util.List;
 
-public class PitchingRecords implements Recordable {
+public class PitchingRecords implements Decidable {
     private final List<PitchingRecord> pitchingRecords;
     private boolean isWin = false;
 
@@ -27,6 +27,11 @@ public class PitchingRecords implements Recordable {
     @Override
     public void win() {
         isWin = true;
+    }
+
+    @Override
+    public boolean isWinner() {
+        return isWin;
     }
 
     @Override
