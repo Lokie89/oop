@@ -10,6 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+// TODO : abstract 로 변경
 public class BaseBallNumbers implements Recordable<BaseBallNumbers>{
     // 순서 보장
     private final Set<BaseBallNumber> baseBallNumbers = new LinkedHashSet<>();

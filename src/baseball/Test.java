@@ -146,22 +146,32 @@ public class Test {
         );
 
 
-
         Decidable pitchingRecords = baseBallNumbers.getCompareRecord(baseBallNumbers2);
         Referee referee = new BaseBallReferee();
         referee.judge(pitchingRecords);
         System.out.println(pitchingRecords);
     }
 
+    private static void BaseBallGameTest() {
+        BaseBallGame playable = new BaseBallGame.Builder().gameNumber(
+                new BaseBallNumbers(3, new RandomNumberGenerator.Builder().max(9).build())
+        ).referee(new BaseBallReferee()).build();
+        playable.playerBaseBallNumbers(new BaseBallNumbers(3, 1, 2, 3));
+        playable.play();
+        playable.playerBaseBallNumbers(new BaseBallNumbers(3, 4,5,6));
+        playable.play();
+    }
+
 
     public static void main(String[] args) {
-        randomNumberGeneratorTest();
-        lowerAlphabetGeneratorTest();
-        upperAlphabetGeneratorTest();
-        baseBallNumberTest();
-        baseBallNumbersTest();
-        baseBallNumbersTest2();
-        baseBallNumbersTest3();
-        judgeableTest();
+//        randomNumberGeneratorTest();
+//        lowerAlphabetGeneratorTest();
+//        upperAlphabetGeneratorTest();
+//        baseBallNumberTest();
+//        baseBallNumbersTest();
+//        baseBallNumbersTest2();
+//        baseBallNumbersTest3();
+//        judgeableTest();
+        BaseBallGameTest();
     }
 }
